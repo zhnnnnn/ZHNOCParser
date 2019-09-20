@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD2B879A232A208900B5A241 /* ZHNOCNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8799232A208900B5A241 /* ZHNOCNode.m */; };
+		CD2B879D232A20A700B5A241 /* ZHNOCMethodNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B879C232A20A700B5A241 /* ZHNOCMethodNode.m */; };
+		CD2B87A5232F8B6E00B5A241 /* ZHNOCAssignmentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87A4232F8B6E00B5A241 /* ZHNOCAssignmentNode.m */; };
+		CD2B87A8232F8E6C00B5A241 /* ZHNOCAssembleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87A7232F8E6C00B5A241 /* ZHNOCAssembleNode.m */; };
+		CD2B87AB232FB43300B5A241 /* ZHNOCIfElseNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87AA232FB43300B5A241 /* ZHNOCIfElseNode.m */; };
+		CD2B87AE232FB95A00B5A241 /* ZHNOCIfElseListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87AD232FB95A00B5A241 /* ZHNOCIfElseListNode.m */; };
+		CD2B87B92330DE7300B5A241 /* ZHNOCIfElseCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87B82330DE7200B5A241 /* ZHNOCIfElseCondition.m */; };
+		CD2BB9CB2321FC0D00AEC88D /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2BB9C82321FC0D00AEC88D /* libffi.a */; };
+		CD2BB9CE2321FE9C00AEC88D /* ZHNOCMethodCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */; };
 		CD8B6914231FACB00037EA8D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6913231FACB00037EA8D /* AppDelegate.m */; };
 		CD8B6917231FACB00037EA8D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6916231FACB00037EA8D /* ViewController.m */; };
 		CD8B691A231FACB00037EA8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8B6918231FACB00037EA8D /* Main.storyboard */; };
@@ -15,6 +24,11 @@
 		CD8B6922231FACB10037EA8D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6921231FACB10037EA8D /* main.m */; };
 		CD8B692C231FACB20037EA8D /* ZHNOCParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B692B231FACB20037EA8D /* ZHNOCParserTests.m */; };
 		CD8B6937231FACB20037EA8D /* ZHNOCParserUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6936231FACB20037EA8D /* ZHNOCParserUITests.m */; };
+		CD8B6946231FACDD0037EA8D /* parser.ym in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6944231FACDD0037EA8D /* parser.ym */; };
+		CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6945231FACDD0037EA8D /* tokenizer.lm */; };
+		CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6949231FADA20037EA8D /* ZHNOCParser.m */; };
+		CDAFFA282333A8400054A58A /* ZHNOCPointerWord.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAFFA272333A8400054A58A /* ZHNOCPointerWord.m */; };
+		CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +49,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD2B8798232A208900B5A241 /* ZHNOCNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCNode.h; sourceTree = "<group>"; };
+		CD2B8799232A208900B5A241 /* ZHNOCNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCNode.m; sourceTree = "<group>"; };
+		CD2B879B232A20A700B5A241 /* ZHNOCMethodNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCMethodNode.h; sourceTree = "<group>"; };
+		CD2B879C232A20A700B5A241 /* ZHNOCMethodNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCMethodNode.m; sourceTree = "<group>"; };
+		CD2B87A3232F8B6E00B5A241 /* ZHNOCAssignmentNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCAssignmentNode.h; sourceTree = "<group>"; };
+		CD2B87A4232F8B6E00B5A241 /* ZHNOCAssignmentNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCAssignmentNode.m; sourceTree = "<group>"; };
+		CD2B87A6232F8E6C00B5A241 /* ZHNOCAssembleNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCAssembleNode.h; sourceTree = "<group>"; };
+		CD2B87A7232F8E6C00B5A241 /* ZHNOCAssembleNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCAssembleNode.m; sourceTree = "<group>"; };
+		CD2B87A9232FB43300B5A241 /* ZHNOCIfElseNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCIfElseNode.h; sourceTree = "<group>"; };
+		CD2B87AA232FB43300B5A241 /* ZHNOCIfElseNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCIfElseNode.m; sourceTree = "<group>"; };
+		CD2B87AC232FB95A00B5A241 /* ZHNOCIfElseListNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCIfElseListNode.h; sourceTree = "<group>"; };
+		CD2B87AD232FB95A00B5A241 /* ZHNOCIfElseListNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCIfElseListNode.m; sourceTree = "<group>"; };
+		CD2B87B72330DE7200B5A241 /* ZHNOCIfElseCondition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCIfElseCondition.h; sourceTree = "<group>"; };
+		CD2B87B82330DE7200B5A241 /* ZHNOCIfElseCondition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCIfElseCondition.m; sourceTree = "<group>"; };
+		CD2BB9BF2321FC0D00AEC88D /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
+		CD2BB9C02321FC0D00AEC88D /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
+		CD2BB9C12321FC0D00AEC88D /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
+		CD2BB9C22321FC0D00AEC88D /* ffi_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_i386.h; sourceTree = "<group>"; };
+		CD2BB9C32321FC0D00AEC88D /* ffitarget_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_x86_64.h; sourceTree = "<group>"; };
+		CD2BB9C42321FC0D00AEC88D /* ffi_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_x86_64.h; sourceTree = "<group>"; };
+		CD2BB9C52321FC0D00AEC88D /* ffitarget_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm.h; sourceTree = "<group>"; };
+		CD2BB9C62321FC0D00AEC88D /* ffitarget_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_i386.h; sourceTree = "<group>"; };
+		CD2BB9C72321FC0D00AEC88D /* ffi_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_common.h; sourceTree = "<group>"; };
+		CD2BB9C82321FC0D00AEC88D /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
+		CD2BB9C92321FC0D00AEC88D /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
+		CD2BB9CA2321FC0D00AEC88D /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
+		CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCMethodCaller.h; sourceTree = "<group>"; };
+		CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCMethodCaller.m; sourceTree = "<group>"; };
 		CD8B690F231FACB00037EA8D /* ZHNOCParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZHNOCParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8B6912231FACB00037EA8D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CD8B6913231FACB00037EA8D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +93,14 @@
 		CD8B6932231FACB20037EA8D /* ZHNOCParserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZHNOCParserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8B6936231FACB20037EA8D /* ZHNOCParserUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCParserUITests.m; sourceTree = "<group>"; };
 		CD8B6938231FACB20037EA8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD8B6944231FACDD0037EA8D /* parser.ym */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = parser.ym; sourceTree = "<group>"; };
+		CD8B6945231FACDD0037EA8D /* tokenizer.lm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = tokenizer.lm; sourceTree = "<group>"; };
+		CD8B6948231FADA20037EA8D /* ZHNOCParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCParser.h; sourceTree = "<group>"; };
+		CD8B6949231FADA20037EA8D /* ZHNOCParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCParser.m; sourceTree = "<group>"; };
+		CDAFFA262333A8400054A58A /* ZHNOCPointerWord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCPointerWord.h; sourceTree = "<group>"; };
+		CDAFFA272333A8400054A58A /* ZHNOCPointerWord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCPointerWord.m; sourceTree = "<group>"; };
+		CDAFFA2C2333B0310054A58A /* ZHNConditionNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNConditionNode.h; sourceTree = "<group>"; };
+		CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNConditionNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2BB9CB2321FC0D00AEC88D /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +129,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2B8797232A206300B5A241 /* node */ = {
+			isa = PBXGroup;
+			children = (
+				CD2B8798232A208900B5A241 /* ZHNOCNode.h */,
+				CD2B8799232A208900B5A241 /* ZHNOCNode.m */,
+				CDAFFA2C2333B0310054A58A /* ZHNConditionNode.h */,
+				CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */,
+				CD2B879B232A20A700B5A241 /* ZHNOCMethodNode.h */,
+				CD2B879C232A20A700B5A241 /* ZHNOCMethodNode.m */,
+				CD2B87A3232F8B6E00B5A241 /* ZHNOCAssignmentNode.h */,
+				CD2B87A4232F8B6E00B5A241 /* ZHNOCAssignmentNode.m */,
+				CD2B87A6232F8E6C00B5A241 /* ZHNOCAssembleNode.h */,
+				CD2B87A7232F8E6C00B5A241 /* ZHNOCAssembleNode.m */,
+				CD2B87A9232FB43300B5A241 /* ZHNOCIfElseNode.h */,
+				CD2B87AA232FB43300B5A241 /* ZHNOCIfElseNode.m */,
+				CD2B87AC232FB95A00B5A241 /* ZHNOCIfElseListNode.h */,
+				CD2B87AD232FB95A00B5A241 /* ZHNOCIfElseListNode.m */,
+				CD2B87B72330DE7200B5A241 /* ZHNOCIfElseCondition.h */,
+				CD2B87B82330DE7200B5A241 /* ZHNOCIfElseCondition.m */,
+				CDAFFA262333A8400054A58A /* ZHNOCPointerWord.h */,
+				CDAFFA272333A8400054A58A /* ZHNOCPointerWord.m */,
+			);
+			path = node;
+			sourceTree = "<group>";
+		};
+		CD2BB9BE2321FC0D00AEC88D /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				CD2BB9BF2321FC0D00AEC88D /* ffitarget_arm64.h */,
+				CD2BB9C02321FC0D00AEC88D /* ffitarget.h */,
+				CD2BB9C12321FC0D00AEC88D /* ffi_arm.h */,
+				CD2BB9C22321FC0D00AEC88D /* ffi_i386.h */,
+				CD2BB9C32321FC0D00AEC88D /* ffitarget_x86_64.h */,
+				CD2BB9C42321FC0D00AEC88D /* ffi_x86_64.h */,
+				CD2BB9C52321FC0D00AEC88D /* ffitarget_arm.h */,
+				CD2BB9C62321FC0D00AEC88D /* ffitarget_i386.h */,
+				CD2BB9C72321FC0D00AEC88D /* ffi_common.h */,
+				CD2BB9C82321FC0D00AEC88D /* libffi.a */,
+				CD2BB9C92321FC0D00AEC88D /* ffi.h */,
+				CD2BB9CA2321FC0D00AEC88D /* ffi_arm64.h */,
+			);
+			path = libffi;
+			sourceTree = "<group>";
+		};
 		CD8B6906231FACB00037EA8D = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +198,14 @@
 			children = (
 				CD8B6912231FACB00037EA8D /* AppDelegate.h */,
 				CD8B6913231FACB00037EA8D /* AppDelegate.m */,
+				CD8B6945231FACDD0037EA8D /* tokenizer.lm */,
+				CD8B6944231FACDD0037EA8D /* parser.ym */,
+				CD8B6948231FADA20037EA8D /* ZHNOCParser.h */,
+				CD8B6949231FADA20037EA8D /* ZHNOCParser.m */,
+				CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */,
+				CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */,
+				CD2B8797232A206300B5A241 /* node */,
+				CD2BB9BE2321FC0D00AEC88D /* libffi */,
 				CD8B6915231FACB00037EA8D /* ViewController.h */,
 				CD8B6916231FACB00037EA8D /* ViewController.m */,
 				CD8B6918231FACB00037EA8D /* Main.storyboard */,
@@ -262,9 +365,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD2B879A232A208900B5A241 /* ZHNOCNode.m in Sources */,
+				CD2B87A5232F8B6E00B5A241 /* ZHNOCAssignmentNode.m in Sources */,
+				CD2B87AB232FB43300B5A241 /* ZHNOCIfElseNode.m in Sources */,
+				CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */,
+				CD2B87B92330DE7300B5A241 /* ZHNOCIfElseCondition.m in Sources */,
 				CD8B6917231FACB00037EA8D /* ViewController.m in Sources */,
 				CD8B6922231FACB10037EA8D /* main.m in Sources */,
+				CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */,
+				CD2B87AE232FB95A00B5A241 /* ZHNOCIfElseListNode.m in Sources */,
+				CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */,
+				CD2B87A8232F8E6C00B5A241 /* ZHNOCAssembleNode.m in Sources */,
+				CD8B6946231FACDD0037EA8D /* parser.ym in Sources */,
+				CD2BB9CE2321FE9C00AEC88D /* ZHNOCMethodCaller.m in Sources */,
+				CDAFFA282333A8400054A58A /* ZHNOCPointerWord.m in Sources */,
 				CD8B6914231FACB00037EA8D /* AppDelegate.m in Sources */,
+				CD2B879D232A20A700B5A241 /* ZHNOCMethodNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,9 +553,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ZHNOCParser/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZHNOCParser/libffi",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = haitao.ZHNOCParser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,9 +574,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ZHNOCParser/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZHNOCParser/libffi",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = haitao.ZHNOCParser;
 				PRODUCT_NAME = "$(TARGET_NAME)";

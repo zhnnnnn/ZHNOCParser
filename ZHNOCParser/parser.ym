@@ -1,0 +1,377 @@
+%{
+    #import "ZHNOCParser.h"
+    #import "ZHNOCPointerWord.h"
+    #import "ZHNOCNode.h"
+    #import "ZHNOCAssignmentNode.h"
+    #import "ZHNOCMethodNode.h"
+    #import "ZHNOCAssembleNode.h"
+    #import "ZHNOCIfElseNode.h"
+    #import "ZHNOCIfElseListNode.h"
+    #import "ZHNOCIfElseCondition.h"
+    #import "ZHNConditionNode.h"
+    
+    static NSMutableArray* gblObjs = nil;
+    void retainObj(id obj);
+    void releaseObjs(void);
+    BOOL isNSNumber(id value);
+    double numberValue(id value);
+    ZHNOCIfElseCondition* instanceCondition(BOOL success,id value);
+    int yylex(void);
+    void yyerror(char *s);
+%}
+
+%union {
+    int p_int;
+    float p_float;
+    double p_double;
+    __unsafe_unretained NSString *p_word;
+    __unsafe_unretained id P_OBJ;
+}
+
+// 优先级
+%left IF ELSEIF ELSE
+
+// 词法
+%token <p_int> IF ELSEIF ELSE
+%token <p_int> OC_YES OC_NO
+%token <p_double> NUM
+%token <p_word> WORD
+%token <p_word> OC_STRING
+%token <P_OBJ> OC_NIL
+%token <p_word> EQUALTO NOT_EQUALTO GTEATER_OR_EQUALTO LESS_OR_EQUALTO JUDGE_AND JUDGE_OR
+
+// 语法
+%type <P_OBJ> param;
+%type <P_OBJ> expr;
+%type <P_OBJ> expr_list;
+%type <P_OBJ> statement_expr;
+%type <p_word> statement;
+%type <P_OBJ> method;
+%type <P_OBJ> method_param_list;
+%type <P_OBJ> method_param;
+%type <p_word> method_param_name;
+%type <P_OBJ> expr_value;
+
+%type <P_OBJ> expr_judge;
+%type <P_OBJ> expr_judge_list;
+%type <P_OBJ> expr_if_else_judge;
+%type <P_OBJ> expr_if_else;
+%type <P_OBJ> expr_if;
+%type <P_OBJ> expr_else;
+%type <P_OBJ> expr_else_if;
+%type <P_OBJ> expr_else_if_list;
+
+%%
+
+param :
+|expr_list {
+    ZHNOCNode *node = $1;
+    [node nodePerform];
+}
+;
+
+expr_list : {
+    ZHNOCAssembleNode *node = [ZHNOCAssembleNode ocnode];
+    $$ = node;
+    retainObj(node);
+}
+|expr_list expr {
+    ZHNOCAssembleNode *node = $1;
+    [node addNode:$2];
+}
+;
+
+expr :
+|statement_expr {
+    $$ = $1;
+}
+|expr_if_else {
+    $$ = $1;
+}
+;
+
+expr_if_else :
+| expr_if {
+    $$ = $1;
+}
+|expr_if expr_else_if_list {
+    ZHNOCIfElseListNode *node = $1;
+    [node addNodesFromArray:$2];
+    $$ = node;
+}
+| expr_if expr_else {
+    ZHNOCIfElseListNode *node = $1;
+    [node addNode:$2];
+    $$ = node;
+}
+| expr_if expr_else_if_list expr_else {
+    ZHNOCIfElseListNode *node = $1;
+    [node addNodesFromArray:$2];
+    [node addNode:$3];
+    $$ = node;
+}
+;
+
+expr_else_if_list: {
+    NSMutableArray *ary = [NSMutableArray array];
+    $$ = ary;
+    retainObj(ary);
+}
+|expr_else_if expr_else_if_list   {
+    NSMutableArray *ary = $2;
+    [ary addObject:$1];
+    $$ = ary;
+}
+;
+
+expr_if :
+|IF '(' expr_judge_list ')' '{' expr_list '}'  {
+    ZHNOCIfElseListNode *listNode = [ZHNOCIfElseListNode ocnode];
+    ZHNOCIfElseNode *node = [ZHNOCIfElseNode nodeWithCondition:$3 type:ZHNOCIfElseNodeType_if assemble:$6];
+    [listNode addNode:node];
+    $$ = listNode;
+    retainObj(listNode);
+    retainObj(node);
+}
+;
+
+expr_else_if :
+|ELSEIF '(' expr_judge_list ')' '{' expr_list '}' {
+    ZHNOCIfElseNode *node = [ZHNOCIfElseNode nodeWithCondition:$3 type:ZHNOCIfElseNodeType_elseif assemble:$6];
+    $$ = node;
+    retainObj(node);
+}
+;
+
+expr_else :
+|ELSE '{' expr_list '}' {
+    ZHNOCIfElseNode *node = [ZHNOCIfElseNode nodeWithCondition:nil type:ZHNOCIfElseNodeType_else assemble:$3];
+    $$ = node;
+    retainObj(node);
+}
+;
+
+statement_expr :
+| statement '=' expr_value ';' {
+    ZHNOCAssignmentNode *node = [ZHNOCAssignmentNode ocnode];
+    node.name = $1;
+    node.value = $3;
+    $$ = node;
+    retainObj(node);
+}
+| expr_value ';' {
+    $$ = $1;
+}
+;
+
+statement :
+| WORD WORD {
+    $$ = $2;
+}
+| WORD '*' WORD {
+    $$ = $3;
+}
+;
+
+method :
+| '[' WORD method_param_list ']' {
+    ZHNOCMethodNode *node = $3;
+    node.targetName = $2;
+    $$ = node;
+}
+// [TODO] 冲突解决
+//| '[' WORD WORD ']' {
+//    ZHNOCMethodNode *node = [ZHNOCMethodNode ocnode];
+//    node.targetName = $2;
+//    node.noParamSelectorName = $3;
+//    $$ = node;
+//    retainObj(node);
+//}
+;
+
+method_param_list : {
+    ZHNOCMethodNode *node = [ZHNOCMethodNode ocnode];
+    $$ = node;
+    retainObj(node);
+}
+|method_param_list method_param {
+    ZHNOCMethodNode *node = $1;
+    [node addParamNode:$2];
+}
+;
+
+method_param :
+|method_param_name expr_value {
+    ZHNOCMethodParamNode *node = [ZHNOCMethodParamNode ocnode];
+    node.name = $1;
+    if ([$2 isKindOfClass:ZHNOCIfElseCondition.class]) {
+        ZHNOCIfElseCondition *judge = $2;
+        node.value = judge.value;
+    }
+    else {
+      node.value = $2;
+    }
+    $$ = node;
+    retainObj(node);
+}
+;
+
+method_param_name :
+|WORD ':' {
+    $$ = $1;
+}
+;
+
+expr_judge_list:
+| expr_if_else_judge {
+    $$ = $1;
+}
+| expr_judge_list JUDGE_AND expr_if_else_judge {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_and;
+    $$ = node;
+    retainObj(node);
+}
+| expr_judge_list JUDGE_OR expr_if_else_judge {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_or;
+    $$ = node;
+    retainObj(node);
+}
+;
+
+expr_if_else_judge:
+|expr_judge {
+    $$ = $1;
+}
+|expr_value {
+    $$ = $1;
+}
+;
+
+expr_judge:
+|expr_value EQUALTO expr_value {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_equal;
+    $$ = node;
+    retainObj(node);
+}
+|expr_value GTEATER_OR_EQUALTO expr_value {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_greaterOrEqual;
+    $$ = node;
+    retainObj(node);
+}
+|expr_value LESS_OR_EQUALTO expr_value {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_lessOrEqual;
+    $$ = node;
+    retainObj(node);
+}
+|expr_value '>' expr_value {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_greater;
+    $$ = node;
+    retainObj(node);
+}
+|expr_value '<' expr_value {
+    ZHNConditionNode *node = [ZHNConditionNode ocnode];
+    node.value1 = $1;
+    node.value2 = $3;
+    node.conditionType = ZHNConditionNodeType_less;
+    $$ = node;
+    retainObj(node);
+}
+;
+
+expr_value :
+|method {
+    $$ = $1;
+}
+|WORD {
+    ZHNOCPointerWord *pointer = [[ZHNOCPointerWord alloc] init];
+    pointer.name = $1;
+    $$ = pointer;
+}
+|NUM {
+    if ($1 == 0) {
+        id num = [NSNumber numberWithDouble:$1];
+        ZHNOCIfElseCondition *judge = instanceCondition(NO,num);
+        $$ = judge;
+        retainObj(judge);
+    }
+    else {
+        id num = [NSNumber numberWithDouble:$1];
+        $$ = num;
+        retainObj(num);
+    }
+}
+|OC_STRING {
+    NSMutableString *muStr = [$1 mutableCopy];
+    muStr = [[muStr substringFromIndex:2] mutableCopy];
+    NSString *str = [muStr substringToIndex:muStr.length - 1];
+    $$ = str;
+    retainObj(str);
+}
+|OC_YES {
+    id num = [NSNumber numberWithInt:$1];
+    ZHNOCIfElseCondition *judge = instanceCondition(YES,num);
+    $$ = judge;
+    retainObj(judge);
+}
+|OC_NO {
+    id num = [NSNumber numberWithInt:$1];
+    ZHNOCIfElseCondition *judge = instanceCondition(NO,num);
+    $$ = judge;
+    retainObj(judge);
+}
+;
+
+%%
+
+void retainObj(id obj) {
+    if (gblObjs == nil) {
+        gblObjs = [NSMutableArray array];
+    }
+    [gblObjs addObject:obj];
+}
+
+void releaseObjs(void) {
+    [gblObjs removeAllObjects];
+}
+
+ZHNOCIfElseCondition* instanceCondition(BOOL success,id value) {
+    ZHNOCIfElseCondition *judge = [ZHNOCIfElseCondition instance];
+    judge.success = success;
+    judge.value = value;
+    retainObj(judge);
+    return judge;
+}
+
+BOOL isNSNumber(id value) {
+    return [value isKindOfClass:NSNumber.class] || [value isKindOfClass:ZHNOCIfElseCondition.class];
+}
+
+double numberValue(id value) {
+    if ([value isKindOfClass:NSNumber.class]) {
+        NSNumber *b = (NSNumber *)value;
+        return [b doubleValue];
+    }
+    else {
+        ZHNOCIfElseCondition *c = (ZHNOCIfElseCondition *)value;
+        return [c.value doubleValue];
+    }
+}
+

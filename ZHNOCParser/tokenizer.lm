@@ -1,0 +1,77 @@
+%{
+#import "ZHNOCParser.h"
+#import "y.tab.h"
+    
+    void yyerror(char *s);
+    NSString* toOCString(void);
+    int toInt(void);
+    double toDouble(void);
+%}
+
+DIGIT [0-9]
+
+%%
+
+else[^\t\r\n]+if {return ELSEIF;}
+"if" {return IF;}
+"else" {return ELSE;}
+
+"YES" {yylval.p_int = 1; return OC_YES;}
+"NO" {yylval.p_int = 0 ; return OC_NO;}
+"nil" {yylval.P_OBJ = nil ; return OC_NIL;}
+"(" {return '(';}
+")" {return ')';}
+";" {return ';';}
+"=" {return '=';}
+"*" {return '*';}
+":" {return ':';}
+"[" {return '[';}
+"]" {return ']';}
+"{" {return '{';}
+"}" {return '}';}
+">" {return '>';}
+"<" {return '<';}
+
+"==" {return EQUALTO;}
+"!=" {return NOT_EQUALTO;}
+">=" {return GTEATER_OR_EQUALTO;}
+"<=" {return LESS_OR_EQUALTO;}
+"&&" {return JUDGE_AND;}
+"||" {return JUDGE_OR;}
+
+@\"([^\\\"]|\\.)*\"  {yylval.p_word = toOCString(); return OC_STRING;}
+
+[_a-zA-Z][_a-zA-Z0-9]* {yylval.p_word = toOCString(); return WORD;}
+
+{DIGIT}+ {yylval.p_double = toDouble(); return NUM;}
+
+{DIGIT}+"."{DIGIT}* {yylval.p_double = toDouble(); return NUM;}
+
+[ \t\r\n]* {}
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+void yyerror(char *s)
+{
+    fflush(stdout);
+    printf("error --- %s", s);
+}
+
+NSString* toOCString()
+{
+    return [NSString stringWithCString:yytext encoding:NSUTF8StringEncoding];
+}
+
+int toInt()
+{
+    return (int)strtol(yytext, NULL, 10);
+}
+
+double toDouble()
+{
+    return atof(yytext);
+}
