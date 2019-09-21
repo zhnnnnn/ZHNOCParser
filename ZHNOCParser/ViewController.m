@@ -26,7 +26,7 @@
 //    [ZHNOCParser parseText:@"[ViewController wtf:YES value2:3];"];
 //    [ZHNOCParser parseText:@"if (1>1) {[ViewController test:@\"1\"];} else if (1>1) {[ViewController test:@\"2\"];} else if (1>1) {[ViewController test:@\"3\"];} else {[ViewController test:@\"4\"];}"];
     
-    [ZHNOCParser parseText:@"if (1 == YES && 1 == 1) {[ViewController test:@\"1\"];}"];
+    [ZHNOCParser parseText:@"if (2 == 3 || 1 == 1) {[ViewController test:@\"1\"];}"];
 }
 
 + (void)test {

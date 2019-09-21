@@ -33,6 +33,7 @@ NS_INLINE BOOL isConditionNode(id value) {
             }
 
             // ‘TODO’ 判断指针和nil
+            
         }
             break;
         case ZHNConditionNodeType_greater: // >
@@ -85,10 +86,10 @@ NS_INLINE BOOL isConditionNode(id value) {
 
             BOOL true2 = YES;
             if (isCondition(self.value2)) {
-                true2 = [(ZHNOCIfElseCondition *)self.value1 success];
+                true2 = [(ZHNOCIfElseCondition *)self.value2 success];
             }
             if (isConditionNode(self.value2)) {
-                id res = [(ZHNConditionNode *)self.value1 nodePerform];
+                id res = [(ZHNConditionNode *)self.value2 nodePerform];
                 if (isCondition(res)) {
                     true2 = [(ZHNOCIfElseCondition *)res success];
                 }
@@ -116,10 +117,10 @@ NS_INLINE BOOL isConditionNode(id value) {
             
             BOOL true2 = YES;
             if (isCondition(self.value2)) {
-                true2 = [(ZHNOCIfElseCondition *)self.value1 success];
+                true2 = [(ZHNOCIfElseCondition *)self.value2 success];
             }
             if (isConditionNode(self.value2)) {
-                id res = [(ZHNConditionNode *)self.value1 nodePerform];
+                id res = [(ZHNConditionNode *)self.value2 nodePerform];
                 if (isCondition(res)) {
                     true2 = [(ZHNOCIfElseCondition *)res success];
                 }
