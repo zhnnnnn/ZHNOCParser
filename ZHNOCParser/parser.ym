@@ -50,6 +50,8 @@
 %type <P_OBJ> method_param_list;
 %type <P_OBJ> method_param;
 %type <p_word> method_param_name;
+%type <P_OBJ> method_target;
+
 %type <P_OBJ> expr_value;
 
 %type <P_OBJ> expr_judge;
@@ -174,19 +176,26 @@ statement :
 ;
 
 method :
-| '[' WORD method_param_list ']' {
+| '[' method_target method_param_list ']' {
     ZHNOCMethodNode *node = $3;
-    node.targetName = $2;
+    node.targetNode = $2;
     $$ = node;
 }
-// [TODO] 冲突解决
-//| '[' WORD WORD ']' {
-//    ZHNOCMethodNode *node = [ZHNOCMethodNode ocnode];
-//    node.targetName = $2;
-//    node.noParamSelectorName = $3;
-//    $$ = node;
-//    retainObj(node);
-//}
+;
+
+method_target :
+| WORD {
+    ZHNOCMethodTargetNode *node = [ZHNOCMethodTargetNode ocnode];
+    node.targetName = $1;
+    $$ = node;
+    retainObj(node);
+}
+| method {
+    ZHNOCMethodTargetNode *node = [ZHNOCMethodTargetNode ocnode];
+    node.node = $1;
+    $$ = node;
+    retainObj(node);
+}
 ;
 
 method_param_list : {
@@ -196,7 +205,12 @@ method_param_list : {
 }
 |method_param_list method_param {
     ZHNOCMethodNode *node = $1;
-    [node addParamNode:$2];
+    if ([$2 isKindOfClass:NSString.class]) {
+        node.noParamSelectorName = $2;
+    }
+    else {
+      [node addParamNode:$2];
+    }
 }
 ;
 
@@ -213,6 +227,9 @@ method_param :
     }
     $$ = node;
     retainObj(node);
+}
+|WORD {
+    $$ = $1;
 }
 ;
 

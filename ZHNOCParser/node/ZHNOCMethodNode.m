@@ -25,24 +25,19 @@
     NSString *selectorName = @"";
     for (ZHNOCMethodParamNode *paramNode in self.paramsNodes) {
         selectorName = [NSString stringWithFormat:@"%@%@:",selectorName,paramNode.name];
-        [values addObject:paramNode.value];
+        id nodeValue = [paramNode nodePerform];
+        if (nodeValue) {
+          [values addObject:nodeValue];
+        }
     }
     if (self.noParamSelectorName.length > 0) {
         selectorName = self.noParamSelectorName;
     }
     SEL sel = NSSelectorFromString(selectorName);
-    id obj = [self getObjInContextForKey:self.targetName];
-    if (obj) {// 实例方法
-        return [ZHNOCMethodCaller zhn_callMethodWithObj:obj isClass:NO selector:sel params:values];
-    }
-    else {// 类方法
-        Class cls = NSClassFromString(self.targetName);
-        if (!cls) {
-            NSLog(@"%@ : 类或者对象不存在",self.targetName);
-            return nil;
-        }
-        return [ZHNOCMethodCaller zhn_callMethodWithObj:cls isClass:YES selector:sel params:values];
-    }
+    id obj = [self.targetNode nodePerform];
+    object_getClassName(obj);
+    return [ZHNOCMethodCaller zhn_callMethodWithObj:obj isClass:self.targetNode.isClass selector:sel params:values];
+    return nil;
 }
 
 #pragma mark - getters
@@ -57,5 +52,37 @@
 
 ////////////////////////////
 @implementation ZHNOCMethodParamNode
+- (id)nodePerform {
+    if ([self.value isKindOfClass:ZHNOCNode.class]) {
+        return [(ZHNOCNode *)self.value nodePerform];
+    }
+    else {
+        return self.value;
+    }
+}
+@end
 
+////////////////////////////
+@implementation ZHNOCMethodTargetNode
+- (id)nodePerform {
+    if (self.node) {
+        return [self.node nodePerform];
+    }
+    else if (self.targetName) {
+        id obj = [self getObjInContextForKey:self.targetName];
+        if (obj) {
+            return obj;
+        }
+        else {
+            _isClass = YES;
+            Class cls = NSClassFromString(self.targetName);
+            if (!cls) {
+                NSLog(@"类 -- %@，不存在，请仔细检查",self.targetName);
+            }
+            return cls;
+        }
+    }
+    return nil;
+    
+}
 @end
