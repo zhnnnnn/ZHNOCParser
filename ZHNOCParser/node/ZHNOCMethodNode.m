@@ -8,6 +8,8 @@
 
 #import "ZHNOCMethodNode.h"
 #import "ZHNOCMethodCaller.h"
+#import "ZHNOCASTContextManager.h"
+#import "ZHNOCASTContextManager.h"
 
 @interface ZHNOCMethodNode()
 @property (nonatomic, strong) NSMutableArray *paramsNodes;
@@ -35,9 +37,7 @@
     }
     SEL sel = NSSelectorFromString(selectorName);
     id obj = [self.targetNode nodePerform];
-    object_getClassName(obj);
     return [ZHNOCMethodCaller zhn_callMethodWithObj:obj isClass:self.targetNode.isClass selector:sel params:values];
-    return nil;
 }
 
 #pragma mark - getters
@@ -48,7 +48,6 @@
     return _paramsNodes;
 }
 @end
-
 
 ////////////////////////////
 @implementation ZHNOCMethodParamNode
@@ -69,7 +68,7 @@
         return [self.node nodePerform];
     }
     else if (self.targetName) {
-        id obj = [self getObjInContextForKey:self.targetName];
+        id obj = [ZHNASTContext getObjInLatestContextForKey:self.targetName];
         if (obj) {
             return obj;
         }

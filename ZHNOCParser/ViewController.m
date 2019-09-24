@@ -17,43 +17,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-//    [ViewController test:@"a\\n"];
-//    [ZHNOCParser parseText:@"[ViewController wtf:[ViewController test:@\"hello\"]]"];
-//    [ZHNOCParser parseText:@"[ViewController test:@\"hello\"]"];
-//    [ZHNOCParser parseText:@"[ViewController wtf:YES];"];
-//    [ZHNOCParser parseText:@"[ViewController floatValue:1.2];"];
-//    [ZHNOCParser parseText:@"[ViewController wtf:YES value2:3];"];
-//    [ZHNOCParser parseText:@"if (1>1) {[ViewController test:@\"1\"];} else if (1>1) {[ViewController test:@\"2\"];} else if (1>1) {[ViewController test:@\"3\"];} else {[ViewController test:@\"4\"];}"];
     
-//    [ZHNOCParser parseText:@"if (2 == 3 || 1 == 1) {[ViewController test:@\"1\"];}"];
-    [ZHNOCParser parseText:@"[[ViewController vc] instanceMethod];"];
+//    [ZHNOCParser parseText:@"if (!NO) {[ViewController test:@\"1\"];}"];
+//    [ZHNOCPararseText:@"[[ViewController vc] instanceMethod];"];
+    
+    [ZHNOCParser parseText:@"NSString *temp = @\"123\"; ViewController *vc = [[ViewController alloc] init]; [vc log:temp];"];
 }
 
-+ (ViewController *)vc{
++ (ViewController *)instance {
     return [[ViewController alloc] init];
 }
 
-- (void)instanceMethod{
-    NSLog(@"instanceMethod");
+- (void)log:(NSString *)str {
+    NSLog(@"log ----- %@",str);
 }
 
-+ (void)test {
-    NSLog(@"test");
-}
-
-+ (int)test:(NSString *)value {
-    NSLog(@"value -- %@",value);
-    return 10;
-}
-
-+ (void)wtf:(int)value value2:(int)value2 {
-    NSLog(@"value1 -- %d value2 --- %d",value,value2);
-}
-
-+ (void)floatValue:(CGFloat)value {
-    NSLog(@"value -- %f",value);
-}
-
+//+ (id)temp {
+//    return nil;
+//}
+//
+//+ (void)test:(int)i {
+//    NSLog(@"test");
+//}
 
 @end

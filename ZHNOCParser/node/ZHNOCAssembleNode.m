@@ -7,6 +7,7 @@
 //
 
 #import "ZHNOCAssembleNode.h"
+#import "ZHNOCASTContextManager.h"
 
 @interface ZHNOCAssembleNode()
 @property (nonatomic, strong) NSMutableArray *nodes;
@@ -20,21 +21,11 @@
 }
 
 - (id)nodePerform {
-    // 上下文处理
-    NSMutableDictionary *context = [NSMutableDictionary dictionary];
-    NSMutableArray *tContexts;
-    if (self.contexts) {
-        tContexts = [self.contexts mutableCopy];
-    }
-    else {
-        tContexts = [NSMutableArray array];
-    }
-    [tContexts addObject:context];
-    
+    [ZHNASTContext pushLatestContext];
     for (ZHNOCNode *node in self.nodes) {
-        node.contexts = tContexts;
         [node nodePerform];
     }
+    [ZHNASTContext popLatestContext];
     return nil;
 }
 

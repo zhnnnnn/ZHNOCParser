@@ -7,17 +7,16 @@
 //
 
 #import "ZHNOCAssignmentNode.h"
-#import "ZHNOCPointerWord.h"
+#import "ZHNOCASTContextManager.h"
 
 @implementation ZHNOCAssignmentNode
 - (id)nodePerform {
     if (self.value && self.name.length > 0) {
-        id value = self.value;
-        if ([self.value isKindOfClass:ZHNOCPointerWord.class]) {
-            NSString *name = [(ZHNOCPointerWord *)self.value name];
-            value = [self getObjInContextForKey:name];
+        id obj = self.value;        
+        if ([self.value isKindOfClass:ZHNOCNode.class]) {
+            obj = [self.value nodePerform];
         }
-        [self assignmentObj:value forKey:self.name];
+        [ZHNASTContext assignmentObj:obj forKey:self.name];
     }
     return nil;
 }

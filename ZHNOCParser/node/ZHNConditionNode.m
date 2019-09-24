@@ -21,19 +21,25 @@ NS_INLINE BOOL isConditionNode(id value) {
     return [value isKindOfClass:ZHNConditionNode.class];
 }
 
+NS_INLINE BOOL isNode(id value) {
+    return [value isKindOfClass:ZHNOCNode.class];
+}
+
 @implementation ZHNConditionNode
 - (id)nodePerform {
     switch (self.conditionType) {
         case ZHNConditionNodeType_equal: //  ==
         {
-            if (isNum(self.value1) && isNum(self.value2)) {
-                if ([self.value1 doubleValue] == [self.value2 doubleValue]) {
-                    return [self trueCondition];
-                }
+            if ([self __isEqual]) {
+                return [self trueCondition];
             }
-
-            // ‘TODO’ 判断指针和nil
-            
+        }
+            break;
+        case ZHNConditionNodeType_notEqual:
+        {
+            if (![self __isEqual]) {
+                return [self trueCondition];
+            }
         }
             break;
         case ZHNConditionNodeType_greater: // >
@@ -148,5 +154,39 @@ NS_INLINE BOOL isConditionNode(id value) {
     ZHNOCIfElseCondition *c = [ZHNOCIfElseCondition instance];
     c.success = NO;
     return c;
+}
+
+- (BOOL)__isEqual {
+    // 数字
+    if (isNum(self.value1) && isNum(self.value2)) {
+        if ([self.value1 doubleValue] == [self.value2 doubleValue]) {
+            return YES;
+        }
+    }
+    
+    // nil
+    BOOL nil1 = NO;
+    if (!self.value1 || ![self.value1 nodePerform]) {
+        nil1 = YES;
+    }
+    
+    BOOL nil2 = NO;
+    if (!self.value2 || ![self.value2 nodePerform]) {
+        nil2 = YES;
+    }
+    
+    if (nil1 && nil2) {
+        return YES;
+    }
+    
+    // 判断指针
+    if (isNode(self.value1) && isNode(self.value2)) {
+        if ([self.value1 nodePerform] == [self.value2 nodePerform]) {
+            return YES;
+        }
+    }
+    
+    
+    return NO;
 }
 @end

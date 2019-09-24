@@ -1,16 +1,16 @@
 //
-//  ZHNOCPointerWord.h
+//  ZHNOCPointerWordNode.h
 //  ZHNOCParser
 //
-//  Created by zhn on 2019/9/19.
+//  Created by zhn on 2019/9/24.
 //  Copyright © 2019 zhn. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "ZHNOCNode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZHNOCPointerWord : NSObject
+@interface ZHNOCPointerWordNode : ZHNOCNode
 @property (nonatomic, copy) NSString *name;
 @end
 

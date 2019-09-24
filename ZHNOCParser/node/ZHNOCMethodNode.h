@@ -20,13 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 ////////////////////////////
 @interface ZHNOCMethodParamNode : ZHNOCNode
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) id value;
+@property (nonatomic, strong) id value;
 @end
 
 ///////////////////////////
 @interface ZHNOCMethodTargetNode : ZHNOCNode
 @property (nonatomic, strong) ZHNOCNode *node;
-@property (nonatomic, strong) NSString *targetName;
+@property (nonatomic, copy) NSString *targetName;
 @property (nonatomic, assign, readonly) BOOL isClass;
 
 @end

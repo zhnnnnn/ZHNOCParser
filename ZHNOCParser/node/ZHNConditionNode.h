@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,ZHNConditionNodeType) {
     ZHNConditionNodeType_equal,
+    ZHNConditionNodeType_notEqual,
     ZHNConditionNodeType_greaterOrEqual,
     ZHNConditionNodeType_lessOrEqual,
     ZHNConditionNodeType_greater,
