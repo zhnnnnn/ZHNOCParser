@@ -153,8 +153,15 @@ return [NSNumber _selector:v];\
 
 @implementation ZHNOCMethodCaller
 + (id)zhn_callMethodWithObj:(id)obj isClass:(BOOL)isClass selector:(SEL)selector params:(NSArray *)params {
+      
     Class cls = object_getClass(obj);
-    Method method = class_getInstanceMethod(cls, selector);
+    Method method;
+    if (isClass) {
+        method = class_getClassMethod(cls, selector);
+    }
+    else {
+        method = class_getInstanceMethod(cls, selector);
+    }
     IMP imp = method_getImplementation(method);
     
     NSMutableArray *typeStrings = [NSMutableArray array];
@@ -180,7 +187,7 @@ return [NSNumber _selector:v];\
     // 参数值
     void **args;
     args = alloca(sizeof(void *) * typeStrings.count);
-    args[0] = &cls;
+    args[0] = &obj;
     args[1] = &selector;
     for (int index = 0; index < params.count; index++) {
         id param = params[index];
