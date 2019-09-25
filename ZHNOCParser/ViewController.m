@@ -11,7 +11,7 @@
 #import <objc/runtime.h>
 
 @interface ViewController ()
-
+@property (nonatomic, copy) NSString *testName;
 @end
 
 @implementation ViewController
@@ -19,12 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [ZHNOCParser parseText:@"if (!NO) {[ViewController test:@\"1\"];}"];
+//    [ZHNOCParser parseText:@"if ((1==1 || 2 == 1) && 1==1) {[ViewController test:@\"1\"];}"];
 //    [ZHNOCPararseText:@"[[ViewController vc] instanceMethod];"];
     
-    [ZHNOCParser parseText:@"NSString *temp = @\"lolllll\"; ViewController *vc = [[ViewController alloc] init]; [vc log:temp];"];
+    [ZHNOCParser parseText:@"ViewController *vc = [[ViewController alloc] init]; vc.testName = @\"123\"; [vc log:vc.testName];"];
     
-//    [ZHNOCParser parseText:@"ViewController *vc = [ViewController alloc]; [vc log:@\"123\"];"];
+//    [ZHNOCParser parseText:@"self.wtf.lalala;"];
 }
 
 - (instancetype)initTemp {
@@ -46,8 +46,8 @@
 //    return nil;
 //}
 //
-//+ (void)test:(int)i {
-//    NSLog(@"test");
-//}
++ (void)test:(int)i {
+    NSLog(@"test");
+}
 
 @end

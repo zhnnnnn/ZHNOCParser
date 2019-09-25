@@ -9,6 +9,7 @@
     #import "ZHNOCIfElseListNode.h"
     #import "ZHNOCIfElseCondition.h"
     #import "ZHNConditionNode.h"
+    #import "ZHNOCGetSetNode.h"
     
     static NSMutableArray* gblObjs = nil;
     void retainObj(id obj);
@@ -51,7 +52,6 @@
 %type <P_OBJ> method_param;
 %type <p_word> method_param_name;
 %type <P_OBJ> method_target;
-
 %type <P_OBJ> expr_value;
 
 %type <P_OBJ> expr_judge;
@@ -62,6 +62,7 @@
 %type <P_OBJ> expr_else;
 %type <P_OBJ> expr_else_if;
 %type <P_OBJ> expr_else_if_list;
+%type <P_OBJ> expr_get_set;
 
 %%
 
@@ -161,6 +162,12 @@ statement_expr :
     $$ = node;
     retainObj(node);
 }
+| expr_get_set '=' expr_value ';' {
+    ZHNOCGetSetNode *node = $1;
+    node.type = ZHNOCGetSetNodeType_set;
+    node.value = $3;
+    $$ = node;
+}
 | expr_value ';' {
     $$ = $1;
 }
@@ -240,6 +247,9 @@ method_param_name :
 ;
 
 expr_judge_list:
+| '(' expr_judge_list ')' {
+    $$ = $2;
+}
 | expr_if_else_judge {
     $$ = $1;
 }
@@ -321,6 +331,20 @@ expr_judge:
 }
 ;
 
+expr_get_set:
+| WORD '.' WORD {
+    ZHNOCGetSetNode *node = [ZHNOCGetSetNode ocnode];
+    [node.names addObject:$1];
+    [node.names addObject:$3];
+    $$ = node;
+    retainObj(node);
+}
+| expr_get_set '.' WORD {
+    ZHNOCGetSetNode *node = (ZHNOCGetSetNode *)$1;
+    [node.names addObject:$3];
+}
+;
+
 expr_value :
 |'!' expr_value {
     ZHNOCIfElseCondition *judge;
@@ -341,6 +365,9 @@ expr_value :
     }
     $$ = judge;
     retainObj(judge);
+}
+|expr_get_set {
+    $$ = $1;
 }
 |method {
     $$ = $1;

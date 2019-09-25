@@ -162,6 +162,9 @@ NS_INLINE BOOL isNode(id value) {
         if ([self.value1 doubleValue] == [self.value2 doubleValue]) {
             return YES;
         }
+        else {
+            return NO;
+        }
     }
     
     // nil

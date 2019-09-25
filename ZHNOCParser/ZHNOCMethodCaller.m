@@ -164,6 +164,12 @@ return [NSNumber _selector:v];\
     }
     IMP imp = method_getImplementation(method);
     
+    if (!imp) {
+        NSString *noticeStr = [NSString stringWithFormat:@"🔥🔥🔥 类%@对应的%@方法不存在，请仔细检查",NSStringFromClass(cls),NSStringFromSelector(selector)];
+        NSAssert(imp,noticeStr);
+        return nil;
+    }
+    
     NSMutableArray *typeStrings = [NSMutableArray array];
     NSMethodSignature *signature = [cls instanceMethodSignatureForSelector:selector];
     NSInteger argTypeCount = signature.numberOfArguments;

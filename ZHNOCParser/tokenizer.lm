@@ -32,6 +32,7 @@ else[^\t\r\n]+if {return ELSEIF;}
 ">" {return '>';}
 "<" {return '<';}
 "!" {return '!';}
+"." {return '.';}
 
 "==" {return EQUALTO;}
 "!=" {return NOT_EQUALTO;}

@@ -9,7 +9,6 @@
 #import "ZHNOCMethodNode.h"
 #import "ZHNOCMethodCaller.h"
 #import "ZHNOCASTContextManager.h"
-#import "ZHNOCASTContextManager.h"
 
 @interface ZHNOCMethodNode()
 @property (nonatomic, strong) NSMutableArray *paramsNodes;
@@ -76,7 +75,8 @@
             _isClass = YES;
             Class cls = NSClassFromString(self.targetName);
             if (!cls) {
-                NSLog(@"类 -- %@，不存在，请仔细检查",self.targetName);
+                NSString *noticeStr = [NSString stringWithFormat:@"🔥🔥🔥🔥🔥 类:%@，不存在，请仔细检查",self.targetName];
+                NSAssert(cls, noticeStr);
             }
             return cls;
         }

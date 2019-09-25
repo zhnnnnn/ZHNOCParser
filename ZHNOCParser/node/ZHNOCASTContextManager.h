@@ -20,11 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pushLatestContext;
 - (void)popLatestContext;
 
-// 初始化一个对象
 - (void)assignmentObj:(id)obj forKey:(NSString *)key;
-// 更新对象值
 - (void)updateObj:(id)obj inLatestContextForKey:(NSString *)key;
-// 获取上下文里的对象值
 - (id)getObjInLatestContextForKey:(NSString *)key;
 @end
 
