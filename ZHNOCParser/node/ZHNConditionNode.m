@@ -27,6 +27,10 @@ NS_INLINE BOOL isNode(id value) {
 
 @implementation ZHNConditionNode
 - (id)nodePerform {
+    // 计算用
+    id numObj1 = [self __numberObjForValue:self.value1];
+    id numObj2 = [self __numberObjForValue:self.value2];
+    
     switch (self.conditionType) {
         case ZHNConditionNodeType_equal: //  ==
         {
@@ -35,7 +39,7 @@ NS_INLINE BOOL isNode(id value) {
             }
         }
             break;
-        case ZHNConditionNodeType_notEqual:
+        case ZHNConditionNodeType_notEqual: // !=
         {
             if (![self __isEqual]) {
                 return [self trueCondition];
@@ -44,8 +48,8 @@ NS_INLINE BOOL isNode(id value) {
             break;
         case ZHNConditionNodeType_greater: // >
         {
-            if (isNum(self.value1) && isNum(self.value2)) {
-                if ([self.value1 doubleValue] > [self.value2 doubleValue]) {
+            if (numObj1 && numObj2) {
+                if ([numObj1 doubleValue] > [numObj2 doubleValue]) {
                     return [self trueCondition];
                 }
             }
@@ -53,8 +57,8 @@ NS_INLINE BOOL isNode(id value) {
             break;
         case ZHNConditionNodeType_less: // <
         {
-            if (isNum(self.value1) && isNum(self.value2)) {
-                if ([self.value1 doubleValue] > [self.value2 doubleValue]) {
+            if (numObj1 && numObj2) {
+                if ([numObj1 doubleValue] > [numObj2 doubleValue]) {
                     return [self trueCondition];
                 }
             }
@@ -62,8 +66,8 @@ NS_INLINE BOOL isNode(id value) {
             break;
         case ZHNConditionNodeType_greaterOrEqual: // >=
         {
-            if (isNum(self.value1) && isNum(self.value2)) {
-                if ([self.value1 doubleValue] >= [self.value2 doubleValue]) {
+            if (numObj1 && numObj2) {
+                if ([numObj1 doubleValue] >= [numObj2 doubleValue]) {
                     return [self trueCondition];
                 }
             }
@@ -71,8 +75,8 @@ NS_INLINE BOOL isNode(id value) {
             break;
         case ZHNConditionNodeType_lessOrEqual: // <=
         {
-            if (isNum(self.value1) && isNum(self.value2)) {
-                if ([self.value1 doubleValue] <= [self.value2 doubleValue]) {
+            if (numObj1 && numObj2) {
+                if ([numObj1 doubleValue] <= [numObj2 doubleValue]) {
                     return [self trueCondition];
                 }
             }
@@ -157,9 +161,10 @@ NS_INLINE BOOL isNode(id value) {
 }
 
 - (BOOL)__isEqual {
-    // 数字
-    if (isNum(self.value1) && isNum(self.value2)) {
-        if ([self.value1 doubleValue] == [self.value2 doubleValue]) {
+    id numObj1 = [self __numberObjForValue:self.value1];
+    id numObj2 = [self __numberObjForValue:self.value2];
+    if (numObj1 && numObj2) {
+        if ([numObj1 doubleValue] == [numObj2 doubleValue]) {
             return YES;
         }
         else {
@@ -191,5 +196,19 @@ NS_INLINE BOOL isNode(id value) {
     
     
     return NO;
+}
+
+- (NSNumber *)__numberObjForValue:(id)value {
+    id numObj;
+    if (isNode(value)) {
+        id temp = [value nodePerform];
+        if ([temp isKindOfClass:NSNumber.class]) {
+            numObj = temp;
+        }
+    }
+    if (isNum(value)) {
+        numObj = value;
+    }
+    return numObj;
 }
 @end

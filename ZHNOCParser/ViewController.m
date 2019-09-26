@@ -12,6 +12,8 @@
 
 @interface ViewController ()
 @property (nonatomic, copy) NSString *testName;
+@property (nonatomic, assign) int testNum;
+
 @end
 
 @implementation ViewController
@@ -22,9 +24,10 @@
 //    [ZHNOCParser parseText:@"if ((1==1 || 2 == 1) && 1==1) {[ViewController test:@\"1\"];}"];
 //    [ZHNOCPararseText:@"[[ViewController vc] instanceMethod];"];
     
-    [ZHNOCParser parseText:@"ViewController *vc = [[ViewController alloc] init]; vc.testName = @\"123\"; [vc log:vc.testName];"];
-    
-//    [ZHNOCParser parseText:@"self.wtf.lalala;"];
+    ViewController *vc = [ZHNOCParser parseText:@"ViewController *vc = [[ViewController alloc] init]; vc.testName = @\"123\"; vc.testNum = 10; if (vc.testNum <= 10) {return vc;}"];
+    NSLog(@"🔥🔥%@",vc.testName);
+
+//    [ZHNOCParser parseText:@"[ViewController test:10];"];
 }
 
 - (instancetype)initTemp {

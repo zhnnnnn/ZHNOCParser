@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHNOCNode : NSObject
+@property (nonatomic, assign) BOOL isRoot;
 + (instancetype)ocnode;
 - (id)nodePerform;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ZHNOCParser.h"
+#import "ZHNOCParseredNodeManager.h"
 
 #ifndef FLEXINT_H
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
@@ -16,10 +17,17 @@ int yyparse(void);
 #endif
 
 @implementation ZHNOCParser
-+ (void)parseText:(NSString *)text {
++ (id)parseText:(NSString *)text {
+    ZHNOCParserLock
     YY_BUFFER_STATE buf;
     buf = yy_scan_string([text cStringUsingEncoding:NSUTF8StringEncoding]);
     yyparse();
     yy_delete_buffer(buf);
+    
+    ZHNOCParseredNodeManager *manager = [ZHNOCParseredNodeManager sharedManager];
+    id obj = [manager.rootNode nodePerform];
+    manager.rootNode = nil;
+    ZHNOCParserUnlock
+    return obj;
 }
 @end

@@ -10,6 +10,8 @@
     #import "ZHNOCIfElseCondition.h"
     #import "ZHNConditionNode.h"
     #import "ZHNOCGetSetNode.h"
+    #import "ZHNOCReturnNode.h"
+    #import "ZHNOCParseredNodeManager.h"
     
     static NSMutableArray* gblObjs = nil;
     void retainObj(id obj);
@@ -40,6 +42,7 @@
 %token <p_word> OC_STRING
 %token <P_OBJ> OC_NIL
 %token <p_word> EQUALTO NOT_EQUALTO GTEATER_OR_EQUALTO LESS_OR_EQUALTO JUDGE_AND JUDGE_OR
+%token <P_OBJ> RETURN
 
 // 语法
 %type <P_OBJ> param;
@@ -69,7 +72,10 @@
 param :
 |expr_list {
     ZHNOCNode *node = $1;
-    [node nodePerform];
+    node.isRoot = YES;
+    ZHNOCParseredNodeManager *manager = [ZHNOCParseredNodeManager sharedManager];
+    manager.rootNode = node;
+    releaseObjs();
 }
 ;
 
@@ -155,35 +161,41 @@ expr_else :
 ;
 
 statement_expr :
-| statement '=' expr_value ';' {
+|statement '=' expr_value ';' {
     ZHNOCAssignmentNode *node = [ZHNOCAssignmentNode ocnode];
     node.name = $1;
     node.value = $3;
     $$ = node;
     retainObj(node);
 }
-| expr_get_set '=' expr_value ';' {
+|expr_get_set '=' expr_value ';' {
     ZHNOCGetSetNode *node = $1;
     node.type = ZHNOCGetSetNodeType_set;
     node.value = $3;
     $$ = node;
 }
-| expr_value ';' {
+|expr_value ';' {
     $$ = $1;
+}
+|RETURN expr_value ';' {
+    ZHNOCReturnNode *node = [ZHNOCReturnNode ocnode];
+    node.value = $2;
+    $$ = node;
+    retainObj(node);
 }
 ;
 
 statement :
-| WORD WORD {
+|WORD WORD {
     $$ = $2;
 }
-| WORD '*' WORD {
+|WORD '*' WORD {
     $$ = $3;
 }
 ;
 
 method :
-| '[' method_target method_param_list ']' {
+|'[' method_target method_param_list ']' {
     ZHNOCMethodNode *node = $3;
     node.targetNode = $2;
     $$ = node;
@@ -191,13 +203,13 @@ method :
 ;
 
 method_target :
-| WORD {
+|WORD {
     ZHNOCMethodTargetNode *node = [ZHNOCMethodTargetNode ocnode];
     node.targetName = $1;
     $$ = node;
     retainObj(node);
 }
-| method {
+|method {
     ZHNOCMethodTargetNode *node = [ZHNOCMethodTargetNode ocnode];
     node.node = $1;
     $$ = node;

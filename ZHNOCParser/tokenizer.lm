@@ -15,7 +15,7 @@ DIGIT [0-9]
 else[^\t\r\n]+if {return ELSEIF;}
 "if" {return IF;}
 "else" {return ELSE;}
-
+"return" {return RETURN;}
 "YES" {yylval.p_int = 1; return OC_YES;}
 "NO" {yylval.p_int = 0 ; return OC_NO;}
 "nil" {yylval.P_OBJ = nil ; return OC_NIL;}

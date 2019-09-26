@@ -17,6 +17,8 @@
 		CD2BB9CB2321FC0D00AEC88D /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2BB9C82321FC0D00AEC88D /* libffi.a */; };
 		CD2BB9CE2321FE9C00AEC88D /* ZHNOCMethodCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */; };
 		CD362CE8233B4DC4006A0B18 /* ZHNOCGetSetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD362CE7233B4DC4006A0B18 /* ZHNOCGetSetNode.m */; };
+		CD362CEB233C6AA2006A0B18 /* ZHNOCReturnNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD362CEA233C6AA2006A0B18 /* ZHNOCReturnNode.m */; };
+		CD362CEE233C8B53006A0B18 /* ZHNOCParseredNodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD362CED233C8B53006A0B18 /* ZHNOCParseredNodeManager.m */; };
 		CD403EED2339B8A200971763 /* ZHNOCASTContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD403EEC2339B8A200971763 /* ZHNOCASTContextManager.m */; };
 		CD403EF02339C16900971763 /* ZHNOCPointerWordNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD403EEF2339C16900971763 /* ZHNOCPointerWordNode.m */; };
 		CD8B6914231FACB00037EA8D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6913231FACB00037EA8D /* AppDelegate.m */; };
@@ -81,6 +83,10 @@
 		CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCMethodCaller.m; sourceTree = "<group>"; };
 		CD362CE6233B4DC4006A0B18 /* ZHNOCGetSetNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCGetSetNode.h; sourceTree = "<group>"; };
 		CD362CE7233B4DC4006A0B18 /* ZHNOCGetSetNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCGetSetNode.m; sourceTree = "<group>"; };
+		CD362CE9233C6AA2006A0B18 /* ZHNOCReturnNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCReturnNode.h; sourceTree = "<group>"; };
+		CD362CEA233C6AA2006A0B18 /* ZHNOCReturnNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCReturnNode.m; sourceTree = "<group>"; };
+		CD362CEC233C8B53006A0B18 /* ZHNOCParseredNodeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCParseredNodeManager.h; sourceTree = "<group>"; };
+		CD362CED233C8B53006A0B18 /* ZHNOCParseredNodeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCParseredNodeManager.m; sourceTree = "<group>"; };
 		CD403EEB2339B8A200971763 /* ZHNOCASTContextManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCASTContextManager.h; sourceTree = "<group>"; };
 		CD403EEC2339B8A200971763 /* ZHNOCASTContextManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCASTContextManager.m; sourceTree = "<group>"; };
 		CD403EEE2339C16900971763 /* ZHNOCPointerWordNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCPointerWordNode.h; sourceTree = "<group>"; };
@@ -160,6 +166,8 @@
 				CD2B87B82330DE7200B5A241 /* ZHNOCIfElseCondition.m */,
 				CD362CE6233B4DC4006A0B18 /* ZHNOCGetSetNode.h */,
 				CD362CE7233B4DC4006A0B18 /* ZHNOCGetSetNode.m */,
+				CD362CE9233C6AA2006A0B18 /* ZHNOCReturnNode.h */,
+				CD362CEA233C6AA2006A0B18 /* ZHNOCReturnNode.m */,
 			);
 			path = node;
 			sourceTree = "<group>";
@@ -212,6 +220,8 @@
 				CD8B6944231FACDD0037EA8D /* parser.ym */,
 				CD8B6948231FADA20037EA8D /* ZHNOCParser.h */,
 				CD8B6949231FADA20037EA8D /* ZHNOCParser.m */,
+				CD362CEC233C8B53006A0B18 /* ZHNOCParseredNodeManager.h */,
+				CD362CED233C8B53006A0B18 /* ZHNOCParseredNodeManager.m */,
 				CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */,
 				CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */,
 				CD2B8797232A206300B5A241 /* node */,
@@ -377,6 +387,7 @@
 			files = (
 				CD2B879A232A208900B5A241 /* ZHNOCNode.m in Sources */,
 				CD2B87A5232F8B6E00B5A241 /* ZHNOCAssignmentNode.m in Sources */,
+				CD362CEE233C8B53006A0B18 /* ZHNOCParseredNodeManager.m in Sources */,
 				CD2B87AB232FB43300B5A241 /* ZHNOCIfElseNode.m in Sources */,
 				CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */,
 				CD2B87B92330DE7300B5A241 /* ZHNOCIfElseCondition.m in Sources */,
@@ -386,6 +397,7 @@
 				CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */,
 				CD2B87AE232FB95A00B5A241 /* ZHNOCIfElseListNode.m in Sources */,
 				CD362CE8233B4DC4006A0B18 /* ZHNOCGetSetNode.m in Sources */,
+				CD362CEB233C6AA2006A0B18 /* ZHNOCReturnNode.m in Sources */,
 				CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */,
 				CD2B87A8232F8E6C00B5A241 /* ZHNOCAssembleNode.m in Sources */,
 				CD8B6946231FACDD0037EA8D /* parser.ym in Sources */,

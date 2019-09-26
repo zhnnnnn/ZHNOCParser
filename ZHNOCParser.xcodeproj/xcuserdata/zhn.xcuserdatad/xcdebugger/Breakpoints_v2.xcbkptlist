@@ -40,27 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZHNOCParser/ZHNOCMethodCaller.m"
-            timestampString = "591107515.564477"
+            timestampString = "591169748.670361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"
             endingLineNumber = "175"
-            landmarkName = "+zhn_callMethodWithObj:isClass:selector:params:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZHNOCParser/ZHNOCMethodCaller.m"
-            timestampString = "591107515.56455"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
             landmarkName = "+zhn_callMethodWithObj:isClass:selector:params:"
             landmarkType = "7">
          </BreakpointContent>
