@@ -11,6 +11,7 @@
 #import <objc/message.h>
 #import "ffi.h"
 #import <UIKit/UIKit.h>
+#import "ZHNOCStructNode.h"
 
 #if CGFLOAT_IS_DOUBLE
 #define CGFloatValue doubleValue
@@ -51,7 +52,9 @@ break;\
             break;
         }
         case '{': {
-            // todo struct
+            if ([object isKindOfClass:ZHNOCStruct.class]) {
+                [(ZHNOCStruct *)object toCValue:arg];
+            }
             break;
         }
         default:
@@ -107,8 +110,60 @@ NS_INLINE ffi_type * ffiTypeWithType (NSString *type) {
             return &ffi_type_pointer;
         case ':':
             return &ffi_type_schar;
+        case '{':
+        {
+            // 解析struct
+            // {CGSize=dd}
+            // {CGAffineTransform=dddddd}
+            // {CGRect={CGPoint=dd}{CGSize=dd}}
+            NSString *typeStr = [NSString stringWithCString:c encoding:NSASCIIStringEncoding];
+            NSInteger location = [typeStr rangeOfString:@"="].location;
+            NSMutableArray *subTypeStrs = [NSMutableArray array];
+            if (location != NSNotFound) {
+                NSString *structName = [typeStr substringWithRange:NSMakeRange(location + 1, typeStr.length - 2 - location)];
+                NSInteger start = 0;
+                NSInteger end = 0;
+                BOOL isStruct = NO;
+                for (int index = 0; index < structName.length; index++) {
+                    NSString *type;
+                    NSString *i = [structName substringWithRange:NSMakeRange(index, 1)];
+                    if ([i isEqualToString:@"{"]) {
+                        isStruct = YES;
+                        start = index;
+                    }
+                    if ([i isEqualToString:@"}"]) {
+                        end = index;
+                        type = [structName substringWithRange:NSMakeRange(start, end - start + 1)];
+                        [subTypeStrs addObject:type];
+                    }
+                    if (!isStruct) {
+                        type = i;
+                        [subTypeStrs addObject:type];
+                    }
+                }
+            }
             
-        // TODO struct
+            ffi_type *type = malloc(sizeof(ffi_type));
+            type->alignment = 0;
+            type->size = 0;
+            type->type = FFI_TYPE_STRUCT;
+
+            NSInteger subTypeCount = subTypeStrs.count;
+            // http://yulingtianxia.com/blog/2019/04/27/BlockHook-with-Struct/
+            // BlockHook里截取，修正了嵌套struct存在的野指针问题
+            NSMutableData *data = [NSMutableData dataWithLength:(subTypeCount + 1) * sizeof(ffi_type *)];
+            ffi_type **sub_types = data.mutableBytes;
+            // 注释部分的代码是jspatch上截取的，嵌套的struct存在提前释放导致的野指针问题
+            // ffi_type **sub_types = malloc(sizeof(ffi_type *) * (subTypeCount + 1));
+            for (NSUInteger i=0; i<subTypeCount; i++) {
+                NSString *typeStr = subTypeStrs[i];
+                sub_types[i] = ffiTypeWithType(typeStr);
+                type->size += sub_types[i]->size;
+            }
+            sub_types[subTypeCount] = NULL;
+            type->elements = sub_types;
+            return type;
+        }
     }
     
     NSCAssert(NO, @"can't match a ffi_type of %@", type);
@@ -144,7 +199,10 @@ return [NSNumber _selector:v];\
             return (__bridge id)(*(void**)src);
         }
         case '{': {
-            // TODO struct
+            NSString *typeStr = [NSString stringWithCString:typeString encoding:NSASCIIStringEncoding];
+            NSInteger location = [typeStr rangeOfString:@"="].location;
+            NSString *type = [typeStr substringWithRange:NSMakeRange(1, location-1)];
+            return [ZHNOCStruct instanceWithTypeString:type value:src];
         }
         default:
             return nil;
@@ -171,7 +229,13 @@ return [NSNumber _selector:v];\
     }
     
     NSMutableArray *typeStrings = [NSMutableArray array];
-    NSMethodSignature *signature = [cls instanceMethodSignatureForSelector:selector];
+    NSMethodSignature *signature;
+    if (isClass) {
+        signature = [cls instanceMethodSignatureForSelector:selector];
+    }
+    else {
+        signature = [obj methodSignatureForSelector:selector];
+    }
     NSInteger argTypeCount = signature.numberOfArguments;
     for (int index = 0; index < argTypeCount; index++) {
         const char *t = [signature getArgumentTypeAtIndex:index];
@@ -212,11 +276,11 @@ return [NSNumber _selector:v];\
     }
 
     ffi_cif cif;
-    ffi_prep_cif(&cif, FFI_DEFAULT_ABI, (int)typeStrings.count, retType, types);
-    // 动态调用fun1
-    ffi_call(&cif, imp, returnPtr, args);
-    
-    ret = CValueToOCObject(returnPtr, ocRet.UTF8String);
+    ffi_status status = ffi_prep_cif(&cif, FFI_DEFAULT_ABI, (int)typeStrings.count, retType, types);
+    if (status == FFI_OK) {
+        ffi_call(&cif, imp, returnPtr, args);
+        ret = CValueToOCObject(returnPtr, ocRet.UTF8String);
+    }
     
     return ret;
 }

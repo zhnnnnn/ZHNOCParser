@@ -8,6 +8,7 @@
 
 #import "ZHNOCParser.h"
 #import "ZHNOCParseredNodeManager.h"
+#import "ZHNOCASTContextManager.h"
 
 #ifndef FLEXINT_H
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
@@ -28,6 +29,17 @@ int yyparse(void);
     id obj = [manager.rootNode nodePerform];
     manager.rootNode = nil;
     ZHNOCParserUnlock
+    return obj;
+}
+
++ (id)parseText:(NSString *)text withContext:(NSDictionary *)context {
+    [ZHNASTContext pushLatestContext];
+    for (NSString *key in context) {
+        id value = [context valueForKey:key];
+        [ZHNASTContext assignmentObj:value forKey:key];
+    }
+    id obj = [self parseText:text];
+    [ZHNASTContext popLatestContext];
     return obj;
 }
 @end

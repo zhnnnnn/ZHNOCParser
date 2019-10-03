@@ -14,7 +14,6 @@
 		CD2B87AB232FB43300B5A241 /* ZHNOCIfElseNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87AA232FB43300B5A241 /* ZHNOCIfElseNode.m */; };
 		CD2B87AE232FB95A00B5A241 /* ZHNOCIfElseListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87AD232FB95A00B5A241 /* ZHNOCIfElseListNode.m */; };
 		CD2B87B92330DE7300B5A241 /* ZHNOCIfElseCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87B82330DE7200B5A241 /* ZHNOCIfElseCondition.m */; };
-		CD2BB9CB2321FC0D00AEC88D /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2BB9C82321FC0D00AEC88D /* libffi.a */; };
 		CD2BB9CE2321FE9C00AEC88D /* ZHNOCMethodCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */; };
 		CD362CE8233B4DC4006A0B18 /* ZHNOCGetSetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD362CE7233B4DC4006A0B18 /* ZHNOCGetSetNode.m */; };
 		CD362CEB233C6AA2006A0B18 /* ZHNOCReturnNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD362CEA233C6AA2006A0B18 /* ZHNOCReturnNode.m */; };
@@ -33,6 +32,8 @@
 		CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6945231FACDD0037EA8D /* tokenizer.lm */; };
 		CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6949231FADA20037EA8D /* ZHNOCParser.m */; };
 		CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */; };
+		CDFEBDB0234059A700722815 /* ZHNOCStructNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFEBDAF234059A700722815 /* ZHNOCStructNode.m */; };
+		CDFEBDC02341EBD200722815 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFEBDBD2341EBD200722815 /* libffi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,18 +68,6 @@
 		CD2B87AD232FB95A00B5A241 /* ZHNOCIfElseListNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCIfElseListNode.m; sourceTree = "<group>"; };
 		CD2B87B72330DE7200B5A241 /* ZHNOCIfElseCondition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCIfElseCondition.h; sourceTree = "<group>"; };
 		CD2B87B82330DE7200B5A241 /* ZHNOCIfElseCondition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCIfElseCondition.m; sourceTree = "<group>"; };
-		CD2BB9BF2321FC0D00AEC88D /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
-		CD2BB9C02321FC0D00AEC88D /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
-		CD2BB9C12321FC0D00AEC88D /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
-		CD2BB9C22321FC0D00AEC88D /* ffi_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_i386.h; sourceTree = "<group>"; };
-		CD2BB9C32321FC0D00AEC88D /* ffitarget_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_x86_64.h; sourceTree = "<group>"; };
-		CD2BB9C42321FC0D00AEC88D /* ffi_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_x86_64.h; sourceTree = "<group>"; };
-		CD2BB9C52321FC0D00AEC88D /* ffitarget_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm.h; sourceTree = "<group>"; };
-		CD2BB9C62321FC0D00AEC88D /* ffitarget_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_i386.h; sourceTree = "<group>"; };
-		CD2BB9C72321FC0D00AEC88D /* ffi_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_common.h; sourceTree = "<group>"; };
-		CD2BB9C82321FC0D00AEC88D /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
-		CD2BB9C92321FC0D00AEC88D /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
-		CD2BB9CA2321FC0D00AEC88D /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
 		CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCMethodCaller.h; sourceTree = "<group>"; };
 		CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCMethodCaller.m; sourceTree = "<group>"; };
 		CD362CE6233B4DC4006A0B18 /* ZHNOCGetSetNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCGetSetNode.h; sourceTree = "<group>"; };
@@ -113,6 +102,19 @@
 		CD8B6949231FADA20037EA8D /* ZHNOCParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCParser.m; sourceTree = "<group>"; };
 		CDAFFA2C2333B0310054A58A /* ZHNConditionNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNConditionNode.h; sourceTree = "<group>"; };
 		CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNConditionNode.m; sourceTree = "<group>"; };
+		CDFEBDAE234059A700722815 /* ZHNOCStructNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCStructNode.h; sourceTree = "<group>"; };
+		CDFEBDAF234059A700722815 /* ZHNOCStructNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCStructNode.m; sourceTree = "<group>"; };
+		CDFEBDB52341EBD200722815 /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
+		CDFEBDB62341EBD200722815 /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
+		CDFEBDB72341EBD200722815 /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
+		CDFEBDB82341EBD200722815 /* ffi_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_i386.h; sourceTree = "<group>"; };
+		CDFEBDB92341EBD200722815 /* ffitarget_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_x86_64.h; sourceTree = "<group>"; };
+		CDFEBDBA2341EBD200722815 /* ffi_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_x86_64.h; sourceTree = "<group>"; };
+		CDFEBDBB2341EBD200722815 /* ffitarget_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm.h; sourceTree = "<group>"; };
+		CDFEBDBC2341EBD200722815 /* ffitarget_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_i386.h; sourceTree = "<group>"; };
+		CDFEBDBD2341EBD200722815 /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
+		CDFEBDBE2341EBD200722815 /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
+		CDFEBDBF2341EBD200722815 /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD2BB9CB2321FC0D00AEC88D /* libffi.a in Frameworks */,
+				CDFEBDC02341EBD200722815 /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,27 +170,11 @@
 				CD362CE7233B4DC4006A0B18 /* ZHNOCGetSetNode.m */,
 				CD362CE9233C6AA2006A0B18 /* ZHNOCReturnNode.h */,
 				CD362CEA233C6AA2006A0B18 /* ZHNOCReturnNode.m */,
+				CDFEBDAE234059A700722815 /* ZHNOCStructNode.h */,
+				CDFEBDAF234059A700722815 /* ZHNOCStructNode.m */,
+				CDFEBDB42341EBD200722815 /* libffi */,
 			);
 			path = node;
-			sourceTree = "<group>";
-		};
-		CD2BB9BE2321FC0D00AEC88D /* libffi */ = {
-			isa = PBXGroup;
-			children = (
-				CD2BB9BF2321FC0D00AEC88D /* ffitarget_arm64.h */,
-				CD2BB9C02321FC0D00AEC88D /* ffitarget.h */,
-				CD2BB9C12321FC0D00AEC88D /* ffi_arm.h */,
-				CD2BB9C22321FC0D00AEC88D /* ffi_i386.h */,
-				CD2BB9C32321FC0D00AEC88D /* ffitarget_x86_64.h */,
-				CD2BB9C42321FC0D00AEC88D /* ffi_x86_64.h */,
-				CD2BB9C52321FC0D00AEC88D /* ffitarget_arm.h */,
-				CD2BB9C62321FC0D00AEC88D /* ffitarget_i386.h */,
-				CD2BB9C72321FC0D00AEC88D /* ffi_common.h */,
-				CD2BB9C82321FC0D00AEC88D /* libffi.a */,
-				CD2BB9C92321FC0D00AEC88D /* ffi.h */,
-				CD2BB9CA2321FC0D00AEC88D /* ffi_arm64.h */,
-			);
-			path = libffi;
 			sourceTree = "<group>";
 		};
 		CD8B6906231FACB00037EA8D = {
@@ -225,7 +211,6 @@
 				CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */,
 				CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */,
 				CD2B8797232A206300B5A241 /* node */,
-				CD2BB9BE2321FC0D00AEC88D /* libffi */,
 				CD8B6915231FACB00037EA8D /* ViewController.h */,
 				CD8B6916231FACB00037EA8D /* ViewController.m */,
 				CD8B6918231FACB00037EA8D /* Main.storyboard */,
@@ -254,6 +239,25 @@
 			);
 			path = ZHNOCParserUITests;
 			sourceTree = "<group>";
+		};
+		CDFEBDB42341EBD200722815 /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				CDFEBDB52341EBD200722815 /* ffitarget_arm64.h */,
+				CDFEBDB62341EBD200722815 /* ffitarget.h */,
+				CDFEBDB72341EBD200722815 /* ffi_arm.h */,
+				CDFEBDB82341EBD200722815 /* ffi_i386.h */,
+				CDFEBDB92341EBD200722815 /* ffitarget_x86_64.h */,
+				CDFEBDBA2341EBD200722815 /* ffi_x86_64.h */,
+				CDFEBDBB2341EBD200722815 /* ffitarget_arm.h */,
+				CDFEBDBC2341EBD200722815 /* ffitarget_i386.h */,
+				CDFEBDBD2341EBD200722815 /* libffi.a */,
+				CDFEBDBE2341EBD200722815 /* ffi.h */,
+				CDFEBDBF2341EBD200722815 /* ffi_arm64.h */,
+			);
+			name = libffi;
+			path = ZHNOCParser/libffi;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -403,6 +407,7 @@
 				CD8B6946231FACDD0037EA8D /* parser.ym in Sources */,
 				CD2BB9CE2321FE9C00AEC88D /* ZHNOCMethodCaller.m in Sources */,
 				CD403EF02339C16900971763 /* ZHNOCPointerWordNode.m in Sources */,
+				CDFEBDB0234059A700722815 /* ZHNOCStructNode.m in Sources */,
 				CD8B6914231FACB00037EA8D /* AppDelegate.m in Sources */,
 				CD2B879D232A20A700B5A241 /* ZHNOCMethodNode.m in Sources */,
 			);

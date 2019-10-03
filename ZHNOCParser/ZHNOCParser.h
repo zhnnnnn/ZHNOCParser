@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHNOCParser : NSObject
 + (id)parseText:(NSString *)text;
++ (id)parseText:(NSString *)text withContext:(NSDictionary *)context;
 @end
 
 NS_ASSUME_NONNULL_END

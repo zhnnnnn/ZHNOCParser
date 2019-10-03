@@ -12,6 +12,7 @@
     #import "ZHNOCGetSetNode.h"
     #import "ZHNOCReturnNode.h"
     #import "ZHNOCParseredNodeManager.h"
+    #import "ZHNOCStructNode.h"
     
     static NSMutableArray* gblObjs = nil;
     void retainObj(id obj);
@@ -66,6 +67,10 @@
 %type <P_OBJ> expr_else_if;
 %type <P_OBJ> expr_else_if_list;
 %type <P_OBJ> expr_get_set;
+
+%type <P_OBJ> expr_struct
+%type <P_OBJ> expr_struct_value
+%type <P_OBJ> expr_struct_value_list
 
 %%
 
@@ -357,6 +362,35 @@ expr_get_set:
 }
 ;
 
+expr_struct :
+| WORD '(' expr_struct_value_list ')' {
+    ZHNOCStructNode *node = [ZHNOCStructNode ocnode];
+    node.cFuncName = $1;
+    node.values = $3;
+    $$ = node;
+    retainObj(node);
+}
+;
+
+expr_struct_value_list: {
+    NSMutableArray *ary = [NSMutableArray array];
+    $$ = ary;
+    retainObj(ary);
+}
+|expr_struct_value_list expr_struct_value {
+    [$1 addObject:$2];
+}
+;
+
+expr_struct_value:
+|NUM ',' {
+    $$ = @($1);
+}
+|NUM {
+    $$ = @($1);
+}
+;
+
 expr_value :
 |'!' expr_value {
     ZHNOCIfElseCondition *judge;
@@ -377,6 +411,9 @@ expr_value :
     }
     $$ = judge;
     retainObj(judge);
+}
+|expr_struct {
+    $$ = $1;
 }
 |expr_get_set {
     $$ = $1;

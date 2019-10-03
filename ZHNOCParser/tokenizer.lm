@@ -1,11 +1,12 @@
 %{
 #import "ZHNOCParser.h"
 #import "y.tab.h"
-    
+
     void yyerror(char *s);
     NSString* toOCString(void);
     int toInt(void);
     double toDouble(void);
+    extern void retainObj(id obj);
 %}
 
 DIGIT [0-9]
@@ -41,13 +42,13 @@ else[^\t\r\n]+if {return ELSEIF;}
 "&&" {return JUDGE_AND;}
 "||" {return JUDGE_OR;}
 
-@\"([^\\\"]|\\.)*\"  {yylval.p_word = toOCString(); return OC_STRING;}
-
 [_a-zA-Z][_a-zA-Z0-9]* {yylval.p_word = toOCString(); return WORD;}
 
 {DIGIT}+ {yylval.p_double = toDouble(); return NUM;}
 
 {DIGIT}+"."{DIGIT}* {yylval.p_double = toDouble(); return NUM;}
+
+@\"([^\\\"]|\\.)*\"  {yylval.p_word = toOCString(); return OC_STRING;}
 
 [ \t\r\n]* {}
 %%
@@ -65,7 +66,9 @@ void yyerror(char *s)
 
 NSString* toOCString()
 {
-    return [NSString stringWithCString:yytext encoding:NSUTF8StringEncoding];
+    NSString *str = [NSString stringWithCString:yytext encoding:NSUTF8StringEncoding];
+    retainObj(str);
+    return str;
 }
 
 int toInt()
