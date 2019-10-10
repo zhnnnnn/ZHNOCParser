@@ -13,6 +13,7 @@
     #import "ZHNOCReturnNode.h"
     #import "ZHNOCParseredNodeManager.h"
     #import "ZHNOCStructNode.h"
+    #import "ZHNOCBlockNode.h"
     
     static NSMutableArray* gblObjs = nil;
     void retainObj(id obj);
@@ -72,6 +73,10 @@
 %type <P_OBJ> expr_struct_value
 %type <P_OBJ> expr_struct_value_list
 
+%type <P_OBJ> block_expr
+%type <p_word> block_return
+%type <P_OBJ> block_params
+
 %%
 
 param :
@@ -100,6 +105,9 @@ expr :
     $$ = $1;
 }
 |expr_if_else {
+    $$ = $1;
+}
+|block_expr {
     $$ = $1;
 }
 ;
@@ -162,6 +170,71 @@ expr_else :
     ZHNOCIfElseNode *node = [ZHNOCIfElseNode nodeWithCondition:nil type:ZHNOCIfElseNodeType_else assemble:$3];
     $$ = node;
     retainObj(node);
+}
+;
+
+block_expr :
+|'^' '(' block_params ')' '{' expr_list '}' {
+    ZHNOCBlockNode *node = [[ZHNOCBlockNode alloc] init];
+    [node addBlockParams:$3];
+    node.assembleNode = $6;
+    node.returnType = nil;
+    $$ = node;
+    retainObj(node);
+}
+|'^' block_return '(' block_params ')' '{' expr_list '}' {
+    ZHNOCBlockNode *node = [[ZHNOCBlockNode alloc] init];
+    [node addBlockParams:$4];
+    node.assembleNode = $7;
+    node.returnType = $2;
+    $$ = node;
+    retainObj(node);
+}
+;
+
+block_return :
+| WORD {
+    $$ = $1;
+}
+| WORD '*' {
+    $$ = @"*";
+}
+;
+
+block_params :{
+    NSMutableArray *ary = [NSMutableArray array];
+    $$ = ary;
+    retainObj(ary);
+}
+|WORD WORD {
+    NSMutableArray *ary = [NSMutableArray array];
+    $$ = ary;
+    retainObj(ary);
+    ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
+    param.paramType = ZHNOCBlockParamType_num;
+    param.name = $2;
+    [ary addObject:param];
+}
+|WORD '*' WORD {
+    NSMutableArray *ary = [NSMutableArray array];
+    $$ = ary;
+    retainObj(ary);
+    ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
+    param.paramType = ZHNOCBlockParamType_pointer;
+    param.name = $3;
+    [ary addObject:param];
+}
+|block_params ',' WORD WORD {
+    ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
+    param.paramType = ZHNOCBlockParamType_num;
+    param.name = $4;
+    [$1 addObject:param];
+}
+|block_params ',' WORD '*' WORD {
+    ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
+    param.paramType = ZHNOCBlockParamType_pointer;
+    param.name = $5;
+    [$1 addObject:param];
 }
 ;
 
@@ -411,6 +484,9 @@ expr_value :
     }
     $$ = judge;
     retainObj(judge);
+}
+|block_expr {
+    $$ = $1;
 }
 |expr_struct {
     $$ = $1;

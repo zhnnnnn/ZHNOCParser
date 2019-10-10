@@ -192,7 +192,7 @@ return [NSNumber _selector:v];\
             JP_FFI_RETURN_CASE('d', double, numberWithDouble)
             JP_FFI_RETURN_CASE('B', BOOL, numberWithBool)
         case '^': {
-            // TODO block
+            return (__bridge id)(*(void**)src);
         }
         case '@':
         case '#': {

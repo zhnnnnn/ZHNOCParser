@@ -10,10 +10,14 @@
 #import "ZHNOCParser.h"
 #import <objc/runtime.h>
 
+#import "ZHNOCMethodCaller.h"
+#import "ZHNOCBlockNode.h"
+
 @interface ViewController ()
 @property (nonatomic, copy) NSString *testName;
 @property (nonatomic, assign) int testNum;
 
+@property (nonatomic, strong) ZHNOCBlockNode *blockNode;
 @end
 
 @implementation ViewController
@@ -35,7 +39,33 @@
     
 //    [ZHNOCParser parseText:@"[ViewController testPoint:CGPointMake(1, 1)];"];
     
-    [ZHNOCParser parseText:@"[ViewController testRect:CGRectMake(2, 10, 1, 1)];"];
+//    [ZHNOCParser parseText:@"[ViewController testRect:CGRectMake(2, 10, 1, 1)];"];
+    
+    
+//    ZHNOCBlockNode *node = [[ZHNOCBlockNode alloc] init];
+//    self.blockNode = node;
+//    [ZHNOCMethodCaller zhn_callMethodWithObj:ViewController.class isClass:YES selector:@selector(blockTest:) params:@[[node blockPtr]]];
+//
+//    [ViewController blockTest2:^NSString *(NSString *str) {
+//        return @"1";
+//    }];
+    
+    
+    [ZHNOCParser parseText:@"[ViewController blockTest2:^CGFloat(NSString *name) {NSString *temp = [name stringByAppendingString:@\"end\"];return 100.12;}];"];
+}
+
++ (void)haveNiceTime {
+    NSLog(@"haveNiceTime");
+}
+
++ (void)blockTest2:(CGFloat(^)(NSString *))block {
+    CGFloat value = block(@"lol222");
+    NSLog(@"end");
+}
+
++ (void)blockTest:(void(^)(NSString *))block {
+    block(@"lol222");
+    NSLog(@"end");
 }
 
 + (void)test:(NSString *)str {

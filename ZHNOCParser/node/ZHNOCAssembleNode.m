@@ -22,6 +22,7 @@
 }
 
 - (id)nodePerform {
+    // 递归结构，如果不是跟节点需要return一个标志来让外面判断是否是return操作
     [ZHNASTContext pushLatestContext];
     for (ZHNOCNode *node in self.nodes) {
         if (self.isRoot) {

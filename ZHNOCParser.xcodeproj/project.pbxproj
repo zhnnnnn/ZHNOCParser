@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD2137D9234CA87100AF798F /* ZHNOCBlockNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2137D8234CA87100AF798F /* ZHNOCBlockNode.m */; };
 		CD2B879A232A208900B5A241 /* ZHNOCNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8799232A208900B5A241 /* ZHNOCNode.m */; };
 		CD2B879D232A20A700B5A241 /* ZHNOCMethodNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B879C232A20A700B5A241 /* ZHNOCMethodNode.m */; };
 		CD2B87A5232F8B6E00B5A241 /* ZHNOCAssignmentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B87A4232F8B6E00B5A241 /* ZHNOCAssignmentNode.m */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD2137D7234CA87100AF798F /* ZHNOCBlockNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCBlockNode.h; sourceTree = "<group>"; };
+		CD2137D8234CA87100AF798F /* ZHNOCBlockNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCBlockNode.m; sourceTree = "<group>"; };
 		CD2B8798232A208900B5A241 /* ZHNOCNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCNode.h; sourceTree = "<group>"; };
 		CD2B8799232A208900B5A241 /* ZHNOCNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCNode.m; sourceTree = "<group>"; };
 		CD2B879B232A20A700B5A241 /* ZHNOCMethodNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCMethodNode.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				CD362CEA233C6AA2006A0B18 /* ZHNOCReturnNode.m */,
 				CDFEBDAE234059A700722815 /* ZHNOCStructNode.h */,
 				CDFEBDAF234059A700722815 /* ZHNOCStructNode.m */,
+				CD2137D7234CA87100AF798F /* ZHNOCBlockNode.h */,
+				CD2137D8234CA87100AF798F /* ZHNOCBlockNode.m */,
 				CDFEBDB42341EBD200722815 /* libffi */,
 			);
 			path = node;
@@ -401,6 +406,7 @@
 				CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */,
 				CD2B87AE232FB95A00B5A241 /* ZHNOCIfElseListNode.m in Sources */,
 				CD362CE8233B4DC4006A0B18 /* ZHNOCGetSetNode.m in Sources */,
+				CD2137D9234CA87100AF798F /* ZHNOCBlockNode.m in Sources */,
 				CD362CEB233C6AA2006A0B18 /* ZHNOCReturnNode.m in Sources */,
 				CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */,
 				CD2B87A8232F8E6C00B5A241 /* ZHNOCAssembleNode.m in Sources */,
