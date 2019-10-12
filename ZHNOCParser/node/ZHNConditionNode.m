@@ -58,7 +58,7 @@ NS_INLINE BOOL isNode(id value) {
         case ZHNConditionNodeType_less: // <
         {
             if (numObj1 && numObj2) {
-                if ([numObj1 doubleValue] > [numObj2 doubleValue]) {
+                if ([numObj1 doubleValue] < [numObj2 doubleValue]) {
                     return [self trueCondition];
                 }
             }

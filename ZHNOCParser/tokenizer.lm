@@ -20,11 +20,29 @@ else[^\t\r\n]+if {return ELSEIF;}
 "YES" {yylval.p_int = 1; return OC_YES;}
 "NO" {yylval.p_int = 0 ; return OC_NO;}
 "nil" {yylval.P_OBJ = nil ; return OC_NIL;}
+
+"for" {return FOR;}
+"in" {return IN;}
+
+"==" {return EQUALTO;}
+"!=" {return NOT_EQUALTO;}
+">=" {return GTEATER_OR_EQUALTO;}
+"<=" {return LESS_OR_EQUALTO;}
+"&&" {return JUDGE_AND;}
+"||" {return JUDGE_OR;}
+
+"++" {return PLUSPLUS;}
+"--" {return MINUSMINUS;}
+
+"+" {return PLUS;}
+"-" {return MINUS;}
+"/" {return DIVIDE;}
+"*" {return POINTER;}
+
 "(" {return '(';}
 ")" {return ')';}
 ";" {return ';';}
 "=" {return '=';}
-"*" {return '*';}
 ":" {return ':';}
 "[" {return '[';}
 "]" {return ']';}
@@ -35,13 +53,6 @@ else[^\t\r\n]+if {return ELSEIF;}
 "!" {return '!';}
 "." {return '.';}
 "^" {return '^';}
-
-"==" {return EQUALTO;}
-"!=" {return NOT_EQUALTO;}
-">=" {return GTEATER_OR_EQUALTO;}
-"<=" {return LESS_OR_EQUALTO;}
-"&&" {return JUDGE_AND;}
-"||" {return JUDGE_OR;}
 
 [_a-zA-Z][_a-zA-Z0-9]* {yylval.p_word = toOCString(); return WORD;}
 

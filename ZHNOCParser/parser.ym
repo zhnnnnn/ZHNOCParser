@@ -14,12 +14,13 @@
     #import "ZHNOCParseredNodeManager.h"
     #import "ZHNOCStructNode.h"
     #import "ZHNOCBlockNode.h"
+    #import "ZHNOCPPMMNode.h"
+    #import "ZHNOCForCycleNode.h"
+    #import "ZHNOCForInCycleNode.h"
     
     static NSMutableArray* gblObjs = nil;
     void retainObj(id obj);
     void releaseObjs(void);
-    BOOL isNSNumber(id value);
-    double numberValue(id value);
     ZHNOCIfElseCondition* instanceCondition(BOOL success,id value);
     int yylex(void);
     void yyerror(char *s);
@@ -33,15 +34,16 @@
     __unsafe_unretained id P_OBJ;
 }
 
-// 优先级
 %left IF ELSEIF ELSE
+%left PLUS MINUS
+%left DIVIDE POINTER
 
-// 词法
 %token <p_int> IF ELSEIF ELSE
 %token <p_int> OC_YES OC_NO
-%token <p_double> NUM
+%token <p_double> NUM PLUSPLUS MINUSMINUS
 %token <p_word> WORD
 %token <p_word> OC_STRING
+%token <p_word> FOR IN
 %token <P_OBJ> OC_NIL
 %token <p_word> EQUALTO NOT_EQUALTO GTEATER_OR_EQUALTO LESS_OR_EQUALTO JUDGE_AND JUDGE_OR
 %token <P_OBJ> RETURN
@@ -77,6 +79,11 @@
 %type <p_word> block_return
 %type <P_OBJ> block_params
 
+%type <p_double> calculate_expr
+
+%type <P_OBJ> ppmm_expr // ++ --
+
+%type <P_OBJ> for_expr
 %%
 
 param :
@@ -108,6 +115,9 @@ expr :
     $$ = $1;
 }
 |block_expr {
+    $$ = $1;
+}
+|for_expr {
     $$ = $1;
 }
 ;
@@ -196,7 +206,7 @@ block_return :
 | WORD {
     $$ = $1;
 }
-| WORD '*' {
+| WORD POINTER {
     $$ = @"*";
 }
 ;
@@ -215,7 +225,7 @@ block_params :{
     param.name = $2;
     [ary addObject:param];
 }
-|WORD '*' WORD {
+|WORD POINTER WORD {
     NSMutableArray *ary = [NSMutableArray array];
     $$ = ary;
     retainObj(ary);
@@ -230,7 +240,7 @@ block_params :{
     param.name = $4;
     [$1 addObject:param];
 }
-|block_params ',' WORD '*' WORD {
+|block_params ',' WORD POINTER WORD {
     ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
     param.paramType = ZHNOCBlockParamType_pointer;
     param.name = $5;
@@ -267,7 +277,7 @@ statement :
 |WORD WORD {
     $$ = $2;
 }
-|WORD '*' WORD {
+|WORD POINTER WORD {
     $$ = $3;
 }
 ;
@@ -464,6 +474,62 @@ expr_struct_value:
 }
 ;
 
+calculate_expr:
+|'(' calculate_expr ')' {
+    $$ = $2;
+}
+|NUM
+|calculate_expr PLUS calculate_expr {
+    $$ = $1 + $3;
+}
+|calculate_expr MINUS calculate_expr {
+    $$ = $1 - $3;
+}
+|calculate_expr DIVIDE calculate_expr {
+    $$ = $1 / $3;
+}
+|calculate_expr POINTER calculate_expr {
+    $$ = $1 * $3;
+}
+;
+
+ppmm_expr:
+|WORD PLUSPLUS {
+    ZHNOCPPMMNode *node = [ZHNOCPPMMNode ocnode];
+    node.name = $1;
+    node.type = ZHNOCPPMMType_plusplus;
+    retainObj(node);
+    $$ = node;
+}
+|WORD MINUSMINUS {
+    ZHNOCPPMMNode *node = [ZHNOCPPMMNode ocnode];
+    node.name = $1;
+    node.type = ZHNOCPPMMType_minusminus;
+    retainObj(node);
+    $$ = node;
+}
+;
+
+for_expr :
+| FOR '(' statement_expr expr_judge ';' ppmm_expr ')' '{' expr_list '}' {
+    ZHNOCForCycleNode *node = [ZHNOCForCycleNode ocnode];
+    node.assembleNode = $9;
+    node.defineNode = $3;
+    node.conditionNode = $4;
+    node.operationNode = $6;
+    retainObj(node);
+    $$ = node;
+}
+| FOR '(' statement IN expr_value ')' '{' expr_list '}' {
+    ZHNOCForInCycleNode *node = [ZHNOCForInCycleNode ocnode];
+    retainObj(node);
+    $$ = node;
+    node.name = $3;
+    node.valuesNode = $5;
+    node.assembleNode = $8;
+}
+;
+
 expr_value :
 |'!' expr_value {
     ZHNOCIfElseCondition *judge;
@@ -484,6 +550,11 @@ expr_value :
     }
     $$ = judge;
     retainObj(judge);
+}
+|calculate_expr {
+    NSNumber *num = [NSNumber numberWithFloat:$1];
+    $$ = num;
+    retainObj(num);
 }
 |block_expr {
     $$ = $1;
@@ -559,20 +630,5 @@ ZHNOCIfElseCondition* instanceCondition(BOOL success,id value) {
     judge.value = value;
     retainObj(judge);
     return judge;
-}
-
-BOOL isNSNumber(id value) {
-    return [value isKindOfClass:NSNumber.class] || [value isKindOfClass:ZHNOCIfElseCondition.class];
-}
-
-double numberValue(id value) {
-    if ([value isKindOfClass:NSNumber.class]) {
-        NSNumber *b = (NSNumber *)value;
-        return [b doubleValue];
-    }
-    else {
-        ZHNOCIfElseCondition *c = (ZHNOCIfElseCondition *)value;
-        return [c.value doubleValue];
-    }
 }
 
