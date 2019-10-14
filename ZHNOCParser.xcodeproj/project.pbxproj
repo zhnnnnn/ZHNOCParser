@@ -223,16 +223,8 @@
 				CD8B6913231FACB00037EA8D /* AppDelegate.m */,
 				CD8B6915231FACB00037EA8D /* ViewController.h */,
 				CD8B6916231FACB00037EA8D /* ViewController.m */,
-				CD8B6945231FACDD0037EA8D /* tokenizer.lm */,
-				CD8B6944231FACDD0037EA8D /* parser.ym */,
-				CD8B6948231FADA20037EA8D /* ZHNOCParser.h */,
-				CD8B6949231FADA20037EA8D /* ZHNOCParser.m */,
-				CD362CEC233C8B53006A0B18 /* ZHNOCParseredNodeManager.h */,
-				CD362CED233C8B53006A0B18 /* ZHNOCParseredNodeManager.m */,
-				CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */,
-				CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */,
-				CD2B8797232A206300B5A241 /* node */,
-				CDFEBDB42341EBD200722815 /* libffi */,
+				CDB90E932354750E000F3551 /* Patch */,
+				CDB90E92235474F2000F3551 /* OCParser */,
 				CD8B6918231FACB00037EA8D /* Main.storyboard */,
 				CD8B691B231FACB10037EA8D /* Assets.xcassets */,
 				CD8B691D231FACB10037EA8D /* LaunchScreen.storyboard */,
@@ -260,6 +252,30 @@
 			path = ZHNOCParserUITests;
 			sourceTree = "<group>";
 		};
+		CDB90E92235474F2000F3551 /* OCParser */ = {
+			isa = PBXGroup;
+			children = (
+				CD8B6945231FACDD0037EA8D /* tokenizer.lm */,
+				CD8B6944231FACDD0037EA8D /* parser.ym */,
+				CD8B6948231FADA20037EA8D /* ZHNOCParser.h */,
+				CD8B6949231FADA20037EA8D /* ZHNOCParser.m */,
+				CD362CEC233C8B53006A0B18 /* ZHNOCParseredNodeManager.h */,
+				CD362CED233C8B53006A0B18 /* ZHNOCParseredNodeManager.m */,
+				CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */,
+				CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */,
+				CD2B8797232A206300B5A241 /* node */,
+				CDFEBDB42341EBD200722815 /* libffi */,
+			);
+			path = OCParser;
+			sourceTree = "<group>";
+		};
+		CDB90E932354750E000F3551 /* Patch */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Patch;
+			sourceTree = "<group>";
+		};
 		CDFEBDB42341EBD200722815 /* libffi */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,7 +292,7 @@
 				CDFEBDBF2341EBD200722815 /* ffi_arm64.h */,
 			);
 			name = libffi;
-			path = ZHNOCParser/libffi;
+			path = ZHNOCParser/OCParser/libffi;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
