@@ -85,11 +85,20 @@ void JPBlockInterpreter(ffi_cif *cif, void *ret, void **args, void *userdata) {
         // 0是block自己参数获取从1开始
         void *argumentPtr = args[index + 1];
         id value = nil;
-        if (param.paramType == ZHNOCBlockParamType_num) {
-            double dvalue = *(double *)argumentPtr;
-            value = [NSNumber numberWithDouble:dvalue];
-        }
-        else {
+#define ZHN_BLOCK_PARAM_TRANS(typeStr,type,sel) \
+        if ([param.typeName isEqualToString:typeStr]) {\
+            type nvalue = *(type *)argumentPtr;\
+            value = [NSNumber sel:nvalue];\
+        }\
+
+        ZHN_BLOCK_PARAM_TRANS(@"char", char, numberWithChar)
+        ZHN_BLOCK_PARAM_TRANS(@"float", float, numberWithFloat)
+        ZHN_BLOCK_PARAM_TRANS(@"double", double, numberWithDouble)
+        ZHN_BLOCK_PARAM_TRANS(@"int", int, numberWithInt)
+        ZHN_BLOCK_PARAM_TRANS(@"short", short, numberWithShort)
+        ZHN_BLOCK_PARAM_TRANS(@"NSInteger", int, numberWithInt)
+        ZHN_BLOCK_PARAM_TRANS(@"CGFloat", double, numberWithDouble)
+        if ([param.typeName isEqualToString:@"*"]) {
             value = (__bridge id)(*(void**)argumentPtr);
         }
         // 数据写入到context
@@ -157,13 +166,14 @@ void JPBlockInterpreter(ffi_cif *cif, void *ret, void **args, void *userdata) {
     
     _args[0] = &ffi_type_pointer;
     for (int index = 0; index < self.params.count; index++) {
-        // 都赋值ffi_type_pointer没啥问题，解析的时候按照对象来解析
-        _args[index + 1] = &ffi_type_pointer;
+        ZHNOCBlockParam *param = self.params[index];
+        ffi_type *type = [self ffiTypeForTypeString:param.typeName];
+        _args[index + 1] = type;
     }
     
     _closure = ffi_closure_alloc(sizeof(ffi_closure), (void **)&blockImp);
     
-    if(ffi_prep_cif(_cifPtr, FFI_DEFAULT_ABI, 2, returnType, _args) == FFI_OK) {
+    if(ffi_prep_cif(_cifPtr, FFI_DEFAULT_ABI, (int)argumentCount, returnType, _args) == FFI_OK) {
         if (ffi_prep_closure_loc(_closure, _cifPtr, JPBlockInterpreter, (__bridge void *)self, blockImp) != FFI_OK) {
             NSAssert(NO, @"generate block error");
         }

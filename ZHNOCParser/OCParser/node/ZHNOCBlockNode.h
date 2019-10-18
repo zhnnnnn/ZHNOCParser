@@ -9,12 +9,6 @@
 #import "ZHNOCNode.h"
 #import "ZHNOCAssembleNode.h"
 
-// tip 参数只支持指针和数字 struct union等都不支持
-typedef NS_ENUM(NSInteger,ZHNOCBlockParamType) {
-    ZHNOCBlockParamType_pointer,
-    ZHNOCBlockParamType_num
-};
-
 @class ZHNOCBlockParam;
 @interface ZHNOCBlockNode : ZHNOCNode
 - (void)addBlockParams:(NSArray *)params;
@@ -25,7 +19,7 @@ typedef NS_ENUM(NSInteger,ZHNOCBlockParamType) {
 
 /////////////////////
 @interface ZHNOCBlockParam : NSObject
-@property (nonatomic, assign) ZHNOCBlockParamType paramType;
+@property (nonatomic, copy) NSString *typeName;// char int ...
 @property (nonatomic, copy) NSString *name;
 @end
 

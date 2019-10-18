@@ -42,4 +42,12 @@ int yyparse(void);
     [ZHNASTContext popLatestContext];
     return obj;
 }
+
++ (id)performRootNode:(ZHNOCNode *)node {
+    [ZHNASTContext pushLatestContext];
+    node.isRoot = YES;
+    id obj = [node nodePerform];
+    [ZHNASTContext popLatestContext];
+    return obj;
+}
 @end

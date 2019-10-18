@@ -17,6 +17,7 @@
     #import "ZHNOCPPMMNode.h"
     #import "ZHNOCForCycleNode.h"
     #import "ZHNOCForInCycleNode.h"
+    #import "ZHNPatchNode.h"
     
     static NSMutableArray* gblObjs = nil;
     void retainObj(id obj);
@@ -46,7 +47,7 @@
 %token <p_word> FOR IN
 %token <P_OBJ> OC_NIL
 %token <p_word> EQUALTO NOT_EQUALTO GTEATER_OR_EQUALTO LESS_OR_EQUALTO JUDGE_AND JUDGE_OR
-%token <P_OBJ> RETURN
+%token <P_OBJ> RETURN OC_PATCH
 
 // 语法
 %type <P_OBJ> param;
@@ -84,6 +85,12 @@
 %type <P_OBJ> ppmm_expr // ++ --
 
 %type <P_OBJ> for_expr
+
+%type <P_OBJ> patch_expr
+%type <P_OBJ> patch_method
+%type <P_OBJ> patch_statement
+%type <P_OBJ> patch_method_item
+%type <P_OBJ> patch_method_item_list
 %%
 
 param :
@@ -93,6 +100,78 @@ param :
     ZHNOCParseredNodeManager *manager = [ZHNOCParseredNodeManager sharedManager];
     manager.rootNode = node;
     releaseObjs();
+}
+|patch_expr {
+    ZHNOCNode *node = $1;
+    node.isRoot = YES;
+    ZHNOCParseredNodeManager *manager = [ZHNOCParseredNodeManager sharedManager];
+    manager.rootNode = node;
+    releaseObjs();
+}
+;
+
+patch_expr :
+|OC_PATCH '(' WORD ',' '{' patch_method '}' ')' {
+    ZHNPatchNode *node = [ZHNPatchNode ocnode];
+    node.method = $6;
+    node.className = $3;
+    retainObj(node);
+    $$ = node;
+}
+;
+
+patch_method:
+|PLUS '(' patch_statement ')' patch_method_item_list '{' expr_list '}' {
+    ZHNPatchMethod *method = [[ZHNPatchMethod alloc] init];
+    method.isClassMethod = YES;
+    method.items = $5;
+    method.assembleNode = $7;
+    $$ = method;
+    retainObj(method);
+}
+|MINUS '(' patch_statement ')' patch_method_item_list '{' expr_list '}' {
+    ZHNPatchMethod *method = [[ZHNPatchMethod alloc] init];
+    method.isClassMethod = NO;
+    method.items = $5;
+    method.assembleNode = $7;
+    $$ = method;
+    retainObj(method);
+}
+;
+
+patch_method_item_list:{
+    NSMutableArray *ary = [NSMutableArray array];
+    $$ = ary;
+    retainObj(ary);
+}
+|patch_method_item_list patch_method_item {
+    NSMutableArray *ary = $1;
+    [ary addObject:$2];
+}
+;
+
+patch_method_item:
+|WORD {
+    ZHNPatchMethodItem *item = [[ZHNPatchMethodItem alloc] init];
+    item.methodName = $1;
+    $$ = item;
+    retainObj(item);
+}
+|WORD ':' '(' patch_statement ')' WORD {
+    ZHNPatchMethodItem *item = [[ZHNPatchMethodItem alloc] init];
+    item.methodName = $1;
+    item.paramName = $6;
+    $$ = item;
+    retainObj(item);
+}
+;
+
+patch_statement :
+|WORD {
+    $$ = $1;
+}
+|WORD POINTER{
+    $$ = @"*";
 }
 ;
 
@@ -200,6 +279,13 @@ block_expr :
     $$ = node;
     retainObj(node);
 }
+|'^' '{' expr_list '}' {
+    ZHNOCBlockNode *node = [[ZHNOCBlockNode alloc] init];
+    node.assembleNode = $3;
+    node.returnType = nil;
+    $$ = node;
+    retainObj(node);
+}
 ;
 
 block_return :
@@ -221,7 +307,7 @@ block_params :{
     $$ = ary;
     retainObj(ary);
     ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
-    param.paramType = ZHNOCBlockParamType_num;
+    param.typeName = $1;
     param.name = $2;
     [ary addObject:param];
 }
@@ -230,19 +316,19 @@ block_params :{
     $$ = ary;
     retainObj(ary);
     ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
-    param.paramType = ZHNOCBlockParamType_pointer;
+    param.typeName = @"*";
     param.name = $3;
     [ary addObject:param];
 }
 |block_params ',' WORD WORD {
     ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
-    param.paramType = ZHNOCBlockParamType_num;
+    param.typeName = $3;
     param.name = $4;
     [$1 addObject:param];
 }
 |block_params ',' WORD POINTER WORD {
     ZHNOCBlockParam *param = [[ZHNOCBlockParam alloc] init];
-    param.paramType = ZHNOCBlockParamType_pointer;
+    param.typeName = @"*";
     param.name = $5;
     [$1 addObject:param];
 }
@@ -297,7 +383,7 @@ method_target :
     $$ = node;
     retainObj(node);
 }
-|method {
+|expr_value {
     ZHNOCMethodTargetNode *node = [ZHNOCMethodTargetNode ocnode];
     node.node = $1;
     $$ = node;
@@ -583,6 +669,19 @@ expr_value :
     }
     else {
         id num = [NSNumber numberWithDouble:$1];
+        $$ = num;
+        retainObj(num);
+    }
+}
+|MINUS NUM {
+    if ($2 == 0) {
+        id num = [NSNumber numberWithDouble:$2];
+        ZHNOCIfElseCondition *judge = instanceCondition(NO,num);
+        $$ = judge;
+        retainObj(judge);
+    }
+    else {
+        id num = [NSNumber numberWithDouble:-$2];
         $$ = num;
         retainObj(num);
     }

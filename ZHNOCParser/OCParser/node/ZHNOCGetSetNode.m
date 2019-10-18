@@ -9,6 +9,7 @@
 #import "ZHNOCGetSetNode.h"
 #import "ZHNOCASTContextManager.h"
 #import "ZHNOCMethodCaller.h"
+#import "ZHNOCIfElseCondition.h"
 
 @implementation ZHNOCGetSetNode
 - (id)nodePerform {
@@ -19,12 +20,18 @@
         }else if (idx == self.names.count - 1 && self.names.count > 1) {
             if (self.type == ZHNOCGetSetNodeType_get) {
                 SEL sel = NSSelectorFromString([self getSelectorNameForPropertyName:name]);
+                if (!obj) {
+                    obj = NSClassFromString(self.names.firstObject);
+                }
                 obj = [ZHNOCMethodCaller zhn_callMethodWithObj:obj isClass:NO selector:sel params:nil];
             }
             else {
                 id param = self.value;
                 if ([self.value isKindOfClass:ZHNOCNode.class]) {
                     param = [(ZHNOCNode *)self.value nodePerform];
+                }
+                if ([self.value isKindOfClass:ZHNOCIfElseCondition.class]) {
+                    param = [(ZHNOCIfElseCondition *)self.value value];
                 }
                 NSMutableArray *params = [NSMutableArray array];
                 if (param) {

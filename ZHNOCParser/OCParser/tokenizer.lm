@@ -13,6 +13,8 @@ DIGIT [0-9]
 
 %%
 
+"PATCH" {return OC_PATCH;}
+
 else[^\t\r\n]+if {return ELSEIF;}
 "if" {return IF;}
 "else" {return ELSE;}
@@ -53,6 +55,7 @@ else[^\t\r\n]+if {return ELSEIF;}
 "!" {return '!';}
 "." {return '.';}
 "^" {return '^';}
+"," {return ',';}
 
 [_a-zA-Z][_a-zA-Z0-9]* {yylval.p_word = toOCString(); return WORD;}
 

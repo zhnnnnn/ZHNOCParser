@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		958D1C857DB794FF2C6B9EB6 /* libPods-ZHNOCParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA5FFFFC387CDA747E50FEC /* libPods-ZHNOCParser.a */; };
 		CD2137D9234CA87100AF798F /* ZHNOCBlockNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2137D8234CA87100AF798F /* ZHNOCBlockNode.m */; };
 		CD2B879A232A208900B5A241 /* ZHNOCNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8799232A208900B5A241 /* ZHNOCNode.m */; };
 		CD2B879D232A20A700B5A241 /* ZHNOCMethodNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B879C232A20A700B5A241 /* ZHNOCMethodNode.m */; };
@@ -36,6 +37,10 @@
 		CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6945231FACDD0037EA8D /* tokenizer.lm */; };
 		CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6949231FADA20037EA8D /* ZHNOCParser.m */; };
 		CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */; };
+		CDB90E9623556543000F3551 /* ZHNOCPatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB90E9523556543000F3551 /* ZHNOCPatcher.m */; };
+		CDD022BF2355F1910026BC52 /* ZHNTypeEncodingTransManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD022BE2355F1910026BC52 /* ZHNTypeEncodingTransManager.m */; };
+		CDD022C223585F920026BC52 /* ZHNPatchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD022C123585F920026BC52 /* ZHNPatchNode.m */; };
+		CDD022C523598FF90026BC52 /* ZHNOCEnumInitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD022C423598FF90026BC52 /* ZHNOCEnumInitManager.m */; };
 		CDFEBDB0234059A700722815 /* ZHNOCStructNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFEBDAF234059A700722815 /* ZHNOCStructNode.m */; };
 		CDFEBDC02341EBD200722815 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFEBDBD2341EBD200722815 /* libffi.a */; };
 /* End PBXBuildFile section */
@@ -58,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15B0A973FFA500CD477A127D /* Pods-ZHNOCParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZHNOCParser.debug.xcconfig"; path = "Target Support Files/Pods-ZHNOCParser/Pods-ZHNOCParser.debug.xcconfig"; sourceTree = "<group>"; };
+		CCA5FFFFC387CDA747E50FEC /* libPods-ZHNOCParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZHNOCParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2137D7234CA87100AF798F /* ZHNOCBlockNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCBlockNode.h; sourceTree = "<group>"; };
 		CD2137D8234CA87100AF798F /* ZHNOCBlockNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCBlockNode.m; sourceTree = "<group>"; };
 		CD2B8798232A208900B5A241 /* ZHNOCNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCNode.h; sourceTree = "<group>"; };
@@ -114,6 +121,14 @@
 		CD8B6949231FADA20037EA8D /* ZHNOCParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCParser.m; sourceTree = "<group>"; };
 		CDAFFA2C2333B0310054A58A /* ZHNConditionNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNConditionNode.h; sourceTree = "<group>"; };
 		CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNConditionNode.m; sourceTree = "<group>"; };
+		CDB90E9423556543000F3551 /* ZHNOCPatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCPatcher.h; sourceTree = "<group>"; };
+		CDB90E9523556543000F3551 /* ZHNOCPatcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCPatcher.m; sourceTree = "<group>"; };
+		CDD022BD2355F1910026BC52 /* ZHNTypeEncodingTransManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNTypeEncodingTransManager.h; sourceTree = "<group>"; };
+		CDD022BE2355F1910026BC52 /* ZHNTypeEncodingTransManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNTypeEncodingTransManager.m; sourceTree = "<group>"; };
+		CDD022C023585F920026BC52 /* ZHNPatchNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNPatchNode.h; sourceTree = "<group>"; };
+		CDD022C123585F920026BC52 /* ZHNPatchNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNPatchNode.m; sourceTree = "<group>"; };
+		CDD022C323598FF90026BC52 /* ZHNOCEnumInitManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCEnumInitManager.h; sourceTree = "<group>"; };
+		CDD022C423598FF90026BC52 /* ZHNOCEnumInitManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCEnumInitManager.m; sourceTree = "<group>"; };
 		CDFEBDAE234059A700722815 /* ZHNOCStructNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCStructNode.h; sourceTree = "<group>"; };
 		CDFEBDAF234059A700722815 /* ZHNOCStructNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCStructNode.m; sourceTree = "<group>"; };
 		CDFEBDB52341EBD200722815 /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
@@ -127,6 +142,7 @@
 		CDFEBDBD2341EBD200722815 /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
 		CDFEBDBE2341EBD200722815 /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
 		CDFEBDBF2341EBD200722815 /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
+		F6812E00BC9B3E2EA159B61D /* Pods-ZHNOCParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZHNOCParser.release.xcconfig"; path = "Target Support Files/Pods-ZHNOCParser/Pods-ZHNOCParser.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDFEBDC02341EBD200722815 /* libffi.a in Frameworks */,
+				958D1C857DB794FF2C6B9EB6 /* libPods-ZHNOCParser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,11 +172,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		691448306753DB0EBE250E94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCA5FFFFC387CDA747E50FEC /* libPods-ZHNOCParser.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CD2B8797232A206300B5A241 /* node */ = {
 			isa = PBXGroup;
 			children = (
 				CD403EEB2339B8A200971763 /* ZHNOCASTContextManager.h */,
 				CD403EEC2339B8A200971763 /* ZHNOCASTContextManager.m */,
+				CDD022C323598FF90026BC52 /* ZHNOCEnumInitManager.h */,
+				CDD022C423598FF90026BC52 /* ZHNOCEnumInitManager.m */,
 				CD2B8798232A208900B5A241 /* ZHNOCNode.h */,
 				CD2B8799232A208900B5A241 /* ZHNOCNode.m */,
 				CD403EEE2339C16900971763 /* ZHNOCPointerWordNode.h */,
@@ -192,6 +219,8 @@
 				CD65AA682350848D002C6001 /* ZHNOCForInCycleNode.m */,
 				CD65AA26234F61B5002C6001 /* ZHNOCPPMMNode.h */,
 				CD65AA27234F61B5002C6001 /* ZHNOCPPMMNode.m */,
+				CDD022C023585F920026BC52 /* ZHNPatchNode.h */,
+				CDD022C123585F920026BC52 /* ZHNPatchNode.m */,
 			);
 			path = node;
 			sourceTree = "<group>";
@@ -203,6 +232,8 @@
 				CD8B692A231FACB20037EA8D /* ZHNOCParserTests */,
 				CD8B6935231FACB20037EA8D /* ZHNOCParserUITests */,
 				CD8B6910231FACB00037EA8D /* Products */,
+				FE0D6F982CA55328B59B74AB /* Pods */,
+				691448306753DB0EBE250E94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,8 +256,9 @@
 				CD8B6916231FACB00037EA8D /* ViewController.m */,
 				CDB90E932354750E000F3551 /* Patch */,
 				CDB90E92235474F2000F3551 /* OCParser */,
-				CD8B6918231FACB00037EA8D /* Main.storyboard */,
+				CDFEBDB42341EBD200722815 /* libffi */,
 				CD8B691B231FACB10037EA8D /* Assets.xcassets */,
+				CD8B6918231FACB00037EA8D /* Main.storyboard */,
 				CD8B691D231FACB10037EA8D /* LaunchScreen.storyboard */,
 				CD8B6920231FACB10037EA8D /* Info.plist */,
 				CD8B6921231FACB10037EA8D /* main.m */,
@@ -263,8 +295,9 @@
 				CD362CED233C8B53006A0B18 /* ZHNOCParseredNodeManager.m */,
 				CD2BB9CC2321FE9C00AEC88D /* ZHNOCMethodCaller.h */,
 				CD2BB9CD2321FE9C00AEC88D /* ZHNOCMethodCaller.m */,
+				CDD022BD2355F1910026BC52 /* ZHNTypeEncodingTransManager.h */,
+				CDD022BE2355F1910026BC52 /* ZHNTypeEncodingTransManager.m */,
 				CD2B8797232A206300B5A241 /* node */,
-				CDFEBDB42341EBD200722815 /* libffi */,
 			);
 			path = OCParser;
 			sourceTree = "<group>";
@@ -272,6 +305,8 @@
 		CDB90E932354750E000F3551 /* Patch */ = {
 			isa = PBXGroup;
 			children = (
+				CDB90E9423556543000F3551 /* ZHNOCPatcher.h */,
+				CDB90E9523556543000F3551 /* ZHNOCPatcher.m */,
 			);
 			path = Patch;
 			sourceTree = "<group>";
@@ -292,8 +327,17 @@
 				CDFEBDBF2341EBD200722815 /* ffi_arm64.h */,
 			);
 			name = libffi;
-			path = ZHNOCParser/OCParser/libffi;
+			path = ZHNOCParser/libffi;
 			sourceTree = SOURCE_ROOT;
+		};
+		FE0D6F982CA55328B59B74AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15B0A973FFA500CD477A127D /* Pods-ZHNOCParser.debug.xcconfig */,
+				F6812E00BC9B3E2EA159B61D /* Pods-ZHNOCParser.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -302,9 +346,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD8B693B231FACB20037EA8D /* Build configuration list for PBXNativeTarget "ZHNOCParser" */;
 			buildPhases = (
+				476BBD9B059FA9C0290111EB /* [CP] Check Pods Manifest.lock */,
 				CD8B690B231FACB00037EA8D /* Sources */,
 				CD8B690C231FACB00037EA8D /* Frameworks */,
 				CD8B690D231FACB00037EA8D /* Resources */,
+				BBEB6F3AD30E61DDEA82B3B0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -420,6 +466,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		476BBD9B059FA9C0290111EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZHNOCParser-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBEB6F3AD30E61DDEA82B3B0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZHNOCParser/Pods-ZHNOCParser-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZHNOCParser/Pods-ZHNOCParser-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZHNOCParser/Pods-ZHNOCParser-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CD8B690B231FACB00037EA8D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -430,8 +518,10 @@
 				CD362CEE233C8B53006A0B18 /* ZHNOCParseredNodeManager.m in Sources */,
 				CD2B87AB232FB43300B5A241 /* ZHNOCIfElseNode.m in Sources */,
 				CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */,
+				CDD022C523598FF90026BC52 /* ZHNOCEnumInitManager.m in Sources */,
 				CD2B87B92330DE7300B5A241 /* ZHNOCIfElseCondition.m in Sources */,
 				CD8B6917231FACB00037EA8D /* ViewController.m in Sources */,
+				CDD022C223585F920026BC52 /* ZHNPatchNode.m in Sources */,
 				CD403EED2339B8A200971763 /* ZHNOCASTContextManager.m in Sources */,
 				CD65AA692350848D002C6001 /* ZHNOCForInCycleNode.m in Sources */,
 				CD8B6922231FACB10037EA8D /* main.m in Sources */,
@@ -447,9 +537,11 @@
 				CD8B6946231FACDD0037EA8D /* parser.ym in Sources */,
 				CD2BB9CE2321FE9C00AEC88D /* ZHNOCMethodCaller.m in Sources */,
 				CD403EF02339C16900971763 /* ZHNOCPointerWordNode.m in Sources */,
+				CDD022BF2355F1910026BC52 /* ZHNTypeEncodingTransManager.m in Sources */,
 				CDFEBDB0234059A700722815 /* ZHNOCStructNode.m in Sources */,
 				CD8B6914231FACB00037EA8D /* AppDelegate.m in Sources */,
 				CD2B879D232A20A700B5A241 /* ZHNOCMethodNode.m in Sources */,
+				CDB90E9623556543000F3551 /* ZHNOCPatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +710,7 @@
 		};
 		CD8B693C231FACB20037EA8D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15B0A973FFA500CD477A127D /* Pods-ZHNOCParser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -639,6 +732,7 @@
 		};
 		CD8B693D231FACB20037EA8D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6812E00BC9B3E2EA159B61D /* Pods-ZHNOCParser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

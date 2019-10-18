@@ -7,6 +7,7 @@
 //
 
 #import "ZHNOCASTContextManager.h"
+#import "ZHNOCEnumInitManager.h"
 
 @implementation ZHNOCASTContextManager
 + (instancetype)sharedInstance {
@@ -20,6 +21,9 @@
 
 - (void)pushLatestContext {
     [self.contexts addObject:[NSMutableDictionary dictionary]];
+    if (self.contexts.count == 1) {
+        [ZHNOCEnumInitManager initOCEnumForContext:self.contexts.firstObject];
+    }
 }
 
 - (void)popLatestContext {
