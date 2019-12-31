@@ -1,0 +1,11 @@
+PATCH(ViewController,{
+- (void)logTitleWithIndex:(NSInteger)index {
+    if (index > self.titleStrs.count) {
+        [SVProgressHUD showErrorWithStatus:@"index太大啦"];
+        return;
+    } else {
+        NSString *str = [self.titleStrs objectAtIndex:index];
+        [SVProgressHUD showSuccessWithStatus:str];
+    }
+}
+})

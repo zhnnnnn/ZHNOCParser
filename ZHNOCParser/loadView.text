@@ -1,0 +1,46 @@
+UIView *container = [[UIView alloc] init];
+container.backgroundColor = UIColor.lightGrayColor;
+container.layer.cornerRadius = 10;
+[self addSubview:container];
+[container autoCenterInSuperviewMargins];
+[container autoSetDimensionsToSize:CGSizeMake(350, 150)];
+
+UIImageView *imageView = [[UIImageView alloc] init];
+[container addSubview:imageView];
+[imageView autoPinEdge:3 toEdge:3 ofView:container withOffset:10];
+imageView.clipsToBounds = YES;
+[imageView autoPinEdge:1 toEdge:1 ofView:container withOffset:10];
+[imageView autoSetDimensionsToSize:CGSizeMake(80, 80)];
+[imageView sd_setImageWithURL:[NSURL URLWithString:@"http://img.wxcha.com/file/201703/03/91b40f2cbc.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [SVProgressHUD showSuccessWithStatus:@"网络图片加载成功"];
+}];
+
+UILabel *titleLabel = [[UILabel alloc] init];
+[container addSubview:titleLabel];
+titleLabel.text = @"标题🔥🔥🔥🔥🔥🔥";
+titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
+[titleLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:imageView withOffset:10];
+[titleLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:container withOffset:10];
+
+UILabel *contentLabel = [[UILabel alloc] init];
+[container addSubview:contentLabel];
+contentLabel.text = @"内容内啊大大额企鹅企鹅去打扫的骄傲是大陆开始打了看电视剧阿达打扫的骄傲看电视剧阿达打扫的骄傲是大陆开始打了看电视剧阿达";
+contentLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightBold];
+contentLabel.numberOfLines = 0;
+[contentLabel autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:imageView withOffset:10];
+[contentLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:container withOffset:40];
+[contentLabel autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:container withOffset:-10];
+
+UIButton *btn = [[UIButton alloc] init];
+[container addSubview:btn];
+[btn setTitle:@"show alert" forState:UIControlStateNormal];
+[btn autoAlignAxisToSuperviewAxis:ALAxisVertical];
+[btn autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:container withOffset:-10];
+[btn autoSetDimensionsToSize:CGSizeMake(200, 30)];
+btn.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1];
+btn.layer.cornerRadius = 10;
+[btn bk_whenTapped:^{
+    [SVProgressHUD showInfoWithStatus:@"alert"];
+}];
+
+return container;

@@ -15,7 +15,7 @@
 #import "ZHNOCParser.h"
 
 void hookffi_function(ffi_cif *cif, void *ret, void **args, void *userdata) {
-    ZHNOCPatchItem *patchItem = (__bridge ZHNOCPatchItem *)userdata;\
+    ZHNOCPatchItem *patchItem = (__bridge ZHNOCPatchItem *)userdata;
     [ZHNASTContext pushLatestContext];
     // 0对应self
     void *selfPtr = args[0];
@@ -37,7 +37,6 @@ void hookffi_function(ffi_cif *cif, void *ret, void **args, void *userdata) {
     }
     
     // TODO 返回值处理
-    
     [ZHNASTContext popLatestContext];
 }
 

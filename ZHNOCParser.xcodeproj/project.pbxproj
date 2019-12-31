@@ -37,6 +37,8 @@
 		CD8B6947231FACDD0037EA8D /* tokenizer.lm in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6945231FACDD0037EA8D /* tokenizer.lm */; };
 		CD8B694A231FADA20037EA8D /* ZHNOCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8B6949231FADA20037EA8D /* ZHNOCParser.m */; };
 		CDAFFA2E2333B0310054A58A /* ZHNConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */; };
+		CDB1C5BA23BB45460093AA7F /* loadView.text in Resources */ = {isa = PBXBuildFile; fileRef = CDB1C5B923BB45460093AA7F /* loadView.text */; };
+		CDB1C5BC23BB454E0093AA7F /* hotPatch.text in Resources */ = {isa = PBXBuildFile; fileRef = CDB1C5BB23BB454E0093AA7F /* hotPatch.text */; };
 		CDB90E9623556543000F3551 /* ZHNOCPatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB90E9523556543000F3551 /* ZHNOCPatcher.m */; };
 		CDD022BF2355F1910026BC52 /* ZHNTypeEncodingTransManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD022BE2355F1910026BC52 /* ZHNTypeEncodingTransManager.m */; };
 		CDD022C223585F920026BC52 /* ZHNPatchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD022C123585F920026BC52 /* ZHNPatchNode.m */; };
@@ -121,6 +123,8 @@
 		CD8B6949231FADA20037EA8D /* ZHNOCParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCParser.m; sourceTree = "<group>"; };
 		CDAFFA2C2333B0310054A58A /* ZHNConditionNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNConditionNode.h; sourceTree = "<group>"; };
 		CDAFFA2D2333B0310054A58A /* ZHNConditionNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNConditionNode.m; sourceTree = "<group>"; };
+		CDB1C5B923BB45460093AA7F /* loadView.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = loadView.text; sourceTree = "<group>"; };
+		CDB1C5BB23BB454E0093AA7F /* hotPatch.text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = hotPatch.text; sourceTree = "<group>"; };
 		CDB90E9423556543000F3551 /* ZHNOCPatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNOCPatcher.h; sourceTree = "<group>"; };
 		CDB90E9523556543000F3551 /* ZHNOCPatcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHNOCPatcher.m; sourceTree = "<group>"; };
 		CDD022BD2355F1910026BC52 /* ZHNTypeEncodingTransManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHNTypeEncodingTransManager.h; sourceTree = "<group>"; };
@@ -254,6 +258,8 @@
 				CD8B6913231FACB00037EA8D /* AppDelegate.m */,
 				CD8B6915231FACB00037EA8D /* ViewController.h */,
 				CD8B6916231FACB00037EA8D /* ViewController.m */,
+				CDB1C5B923BB45460093AA7F /* loadView.text */,
+				CDB1C5BB23BB454E0093AA7F /* hotPatch.text */,
 				CDB90E932354750E000F3551 /* Patch */,
 				CDB90E92235474F2000F3551 /* OCParser */,
 				CDFEBDB42341EBD200722815 /* libffi */,
@@ -446,7 +452,9 @@
 			files = (
 				CD8B691F231FACB10037EA8D /* LaunchScreen.storyboard in Resources */,
 				CD8B691C231FACB10037EA8D /* Assets.xcassets in Resources */,
+				CDB1C5BC23BB454E0093AA7F /* hotPatch.text in Resources */,
 				CD8B691A231FACB00037EA8D /* Main.storyboard in Resources */,
+				CDB1C5BA23BB45460093AA7F /* loadView.text in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
